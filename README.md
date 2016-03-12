@@ -38,7 +38,7 @@ The player can move in walking and combat mode on both the __2D axis__.
 ### 3.d Actions
 
 When he is in walking mode, the player can __interact__ with object by pushing the __E key__ near them.
-When he is in combat mode, the player has several __actions__ buttons offered to him. He can __fight__, __act_, choose an __item__ and show __mercy__ for the opponent.
+When he is in combat mode, the player has several __actions__ buttons offered to him. He can __fight__, __act__, choose an __item__ and show __mercy__ for the opponent.
 
 ### 3.e Fighting
 
