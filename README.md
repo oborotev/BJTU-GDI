@@ -29,7 +29,7 @@ When he enters in __combat mode__, not him, but his __soul__ is represented as a
 ### 3.b Hit points
 
 When he is in combat mode, the player has a __limited number of hit points__, as for the enemy.
-When the __soul__ of the player gets hit, he looses __one or more__ hit points until he reaches 0, where he __dies__.
+When the __soul__ of the player gets hit, he looses __one or more__ hit points until it reaches 0, where he __dies__.
 
 ### 3.c Movements
 
