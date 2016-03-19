@@ -25,4 +25,4 @@ The goal is to beat, disregarding how it'd be done, the event triggered by the g
 
 ## 4. Prototype Picture
 It would look like that :
-![alt text](https://raw.githubusercontent.com/oborotev/BJTU-GDI/week2/pictures/prototype.png)
+![Protofrisk](https://raw.githubusercontent.com/oborotev/BJTU-GDI/week2/picture/prototype.png)
