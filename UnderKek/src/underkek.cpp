@@ -11,7 +11,7 @@ Underkek::~Underkek() {
 const int   Underkek::playerInit()
 {
     this->_mediaHandler->addNewTexture("../media/textures/frisk.png", "frisky");
-    this->_graphicHandler->initPlayer(500, 500, 20, 5.0, true, sf::seconds(0.2), this->_mediaHandler->getTexture("frisky"));
+    this->_graphicHandler->initPlayer(200, 200, 20, 5.0, true, sf::seconds(0.2), this->_mediaHandler->getTexture("frisky"));
     //Animation Still
     this->_graphicHandler->getPlayer()->addFrameState(LivingEntity::Direction::STILL, sf::IntRect(0, 0, 38, 57));
     //Animation UP
@@ -52,6 +52,7 @@ const int   Underkek::start() {
         std::cout << "There was a problem with the graphical initialization" << std::endl;
         return 1;
     }
+    this->_graphicHandler->getCamera()->updatePositionCenter(this->_graphicHandler->getPlayer()->getX(), this->_graphicHandler->getPlayer()->getY());
     this->_graphicHandler->launch();
     while (this->_graphicHandler->getIsAlive())
     {
