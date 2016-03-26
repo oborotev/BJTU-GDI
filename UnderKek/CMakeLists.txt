@@ -6,6 +6,8 @@ set(EXECUTABLE_NAME UnderKek)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+include_directories(BEFORE ${MY_SOURCE_DIR}includes/)
+
 # Include cmake KekEngine
 include(${CMAKE_CURRENT_SOURCE_DIR}/../GameEngine/KekEngine.cmake)
 
@@ -13,7 +15,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../GameEngine/KekEngine.cmake)
 set(dir ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${dir}/bin")
 
-set(SOURCE_FILES src/main.cpp)
+set(SOURCE_FILES src/main.cpp src/underkek.cpp)
 add_executable(UnderKek ${KEKENGINE_SRC} ${COLLISIONS_SRC} ${ANIMATIONS_SRC}  ${SOURCE_FILES})
 
 # Detect and add SFML

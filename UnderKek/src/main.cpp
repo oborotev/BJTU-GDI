@@ -1,8 +1,9 @@
-#include <iostream>
-
-using namespace std;
+# include "underkek.h"
 
 int main() {
-    cout << "Hello, World!" << endl;
+    Underkek game;
+
+    game.init();
+    game.start();
     return 0;
 }
