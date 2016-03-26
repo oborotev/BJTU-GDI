@@ -153,7 +153,8 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
             this->_mainCamera->arbitraryMove(0, -coef);
             this->_window->setView(*this->_mainCamera->getView());
         }
-        entity->changeDirection(LivingEntity::Direction::UP);
+        if (!_playerMoved)
+            entity->changeDirection(LivingEntity::Direction::UP);
         entity->move(0, -coef);
         moved = true;
     }
@@ -163,7 +164,8 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
             this->_mainCamera->arbitraryMove(0, coef);
             this->_window->setView(*this->_mainCamera->getView());
         }
-        entity->changeDirection(LivingEntity::Direction::DOWN);
+        if (!_playerMoved)
+            entity->changeDirection(LivingEntity::Direction::DOWN);
         entity->move(0, coef);
         moved = true;
     }
@@ -173,7 +175,8 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
             this->_mainCamera->arbitraryMove(-coef, 0);
             this->_window->setView(*this->_mainCamera->getView());
         }
-        entity->changeDirection(LivingEntity::Direction::LEFT);
+        if (!_playerMoved)
+            entity->changeDirection(LivingEntity::Direction::LEFT);
         entity->move(-coef, 0);
         moved = true;
     }
@@ -183,8 +186,9 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
             this->_mainCamera->arbitraryMove(coef, 0);
             this->_window->setView(*this->_mainCamera->getView());
         }
-        entity->changeDirection(LivingEntity::Direction::RIGHT);
-        entity->move(-coef, 0);
+        if (!_playerMoved)
+            entity->changeDirection(LivingEntity::Direction::RIGHT);
+        entity->move(coef, 0);
         moved = true;
     }
     if (isPlayer)
@@ -213,6 +217,7 @@ const int     GraphicHandler::init()
     this->_clock = new sfx::FrameClock();
     this->_clockHUD = new ClockHUD(*this->_clock, this->_mainFont);
     this->_window->setFramerateLimit(60);
+    this->_window->setVerticalSyncEnabled(true);
     this->_mainCamera->init(this->_window->getSize().x, this->_window->getSize().y,sf::FloatRect(0, 0, this->_window->getSize().x, this->_window->getSize().y), this->_cameraDelimited, this->_cameraDelimitation);
     this->_window->setView(*this->_mainCamera->getView());
     return (0);

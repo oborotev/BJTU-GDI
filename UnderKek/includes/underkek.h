@@ -14,6 +14,7 @@ public:
     ~Underkek();
     const int   init();
     const int   start();
+    const int   playerInit();
 private:
     GraphicHandler *_graphicHandler;
     MediaHandler   *_mediaHandler;
