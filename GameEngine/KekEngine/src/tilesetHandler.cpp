@@ -63,6 +63,12 @@ const int           TilesetHandler::load(const std::string& level_path)
     }
 }
 
+const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, const sf::Vector2i &position, const LivingEntity::Direction &direction)
+{
+
+    return (false);
+}
+
 const int           TilesetHandler::init(sf::Texture *tileset, sf::Vector2u tileSize, const std::string& level_path, unsigned int width, unsigned int height, int* tileDefinition)
 {
     bool        isFile = false;
@@ -77,6 +83,7 @@ const int           TilesetHandler::init(sf::Texture *tileset, sf::Vector2u tile
 
     this->_tileset = tileset;
     this->_tileDefinition = tileDefinition;
+    this->_tileSize = tileSize;
     _vertices.setPrimitiveType(sf::Quads);
     _vertices.resize(this->_width * this->_height * 4);
 
