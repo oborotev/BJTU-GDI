@@ -52,7 +52,6 @@ const int   Underkek::start() {
         std::cout << "There was a problem with the graphical initialization" << std::endl;
         return 1;
     }
-    this->_graphicHandler->getCamera()->updatePositionCenter(this->_graphicHandler->getPlayer()->getX(), this->_graphicHandler->getPlayer()->getY());
     this->_graphicHandler->launch();
     while (this->_graphicHandler->getIsAlive())
     {
