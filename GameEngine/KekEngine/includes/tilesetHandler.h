@@ -19,8 +19,8 @@ public:
         WALL = 1
     };
 public:
-    TilesetHandler() {};
-    ~TilesetHandler() {};
+    TilesetHandler() { this->_tiles = NULL; };
+    ~TilesetHandler();
     const int       init(sf::Texture *tileset, sf::Vector2u tileSize, const std::string& level_path, unsigned int width=0, unsigned int height=0, int* tileDefinition={0});
     const int       load(const std::string& level_path);
     const bool      checkCollision(sf::Sprite* objectSprite, const sf::Vector2i &position, const LivingEntity::Direction &direction);

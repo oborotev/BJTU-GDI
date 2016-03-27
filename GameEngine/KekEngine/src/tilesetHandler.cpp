@@ -6,6 +6,10 @@
 # include <iostream>
 # include <sstream>
 
+TilesetHandler::~TilesetHandler()
+{
+}
+
 const int           TilesetHandler::load(const std::string& level_path)
 {
     std::ifstream file(level_path);
@@ -65,7 +69,16 @@ const int           TilesetHandler::load(const std::string& level_path)
 
 const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, const sf::Vector2i &position, const LivingEntity::Direction &direction)
 {
+    sf::Sprite       temp;
 
+    if (position.x < 0 || position.x > this->_width * this->_tileSize.x ||
+            position.y < 0 || position.y > this->_height * this->_tileSize.y)
+    {
+        std::cout << "OUT OF MAP" << std::endl;
+        return (false);
+    }
+    else
+        std::cout << "IN MAP" << std::endl;
     return (false);
 }
 
@@ -108,8 +121,6 @@ const int           TilesetHandler::init(sf::Texture *tileset, sf::Vector2u tile
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
         }
-    if (isFile)
-     delete [] this->_tiles;
     return 0;
 }
 
