@@ -25,7 +25,7 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
     float        entityY = entity->getY();
 
     if (direction == LivingEntity::Direction::UP &&
-        !this->_baseMap->checkCollision(entity->getAnimation()->getSpriteFrame(), sf::Vector2i(entityX, entityY - coef), LivingEntity::Direction::UP))
+        !this->_baseMap->checkCollision(entity->getAnimation()->getSpriteFrame(), sf::Vector2<double>(entityX, entityY - coef), LivingEntity::Direction::UP))
     {
         if (moveCamera)
         {
@@ -38,7 +38,7 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
         moved = true;
     }
     else if (direction == LivingEntity::Direction::DOWN &&
-             !this->_baseMap->checkCollision(entity->getAnimation()->getSpriteFrame(), sf::Vector2i(entityX, entityY + coef), LivingEntity::Direction::DOWN))
+             !this->_baseMap->checkCollision(entity->getAnimation()->getSpriteFrame(), sf::Vector2<double>(entityX, entityY + coef), LivingEntity::Direction::DOWN))
     {
         if (moveCamera) {
             this->_mainCamera->arbitraryMove(0, coef);
@@ -50,7 +50,7 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
         moved = true;
     }
     else if (direction == LivingEntity::Direction::LEFT &&
-             !this->_baseMap->checkCollision(entity->getAnimation()->getSpriteFrame(), sf::Vector2i(entityX - coef, entityY), LivingEntity::Direction::LEFT))
+             !this->_baseMap->checkCollision(entity->getAnimation()->getSpriteFrame(), sf::Vector2<double>(entityX - coef, entityY), LivingEntity::Direction::LEFT))
     {
         if (moveCamera) {
             this->_mainCamera->arbitraryMove(-coef, 0);
@@ -62,7 +62,7 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
         moved = true;
     }
     else if (direction == LivingEntity::Direction::RIGHT &&
-             !this->_baseMap->checkCollision(entity->getAnimation()->getSpriteFrame(), sf::Vector2i(entityX + coef, entityY), LivingEntity::Direction::RIGHT))
+             !this->_baseMap->checkCollision(entity->getAnimation()->getSpriteFrame(), sf::Vector2<double>(entityX + coef, entityY), LivingEntity::Direction::RIGHT))
     {
         if (moveCamera) {
             this->_mainCamera->arbitraryMove(coef, 0);

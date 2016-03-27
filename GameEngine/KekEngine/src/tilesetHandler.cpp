@@ -67,12 +67,23 @@ const int           TilesetHandler::load(const std::string& level_path)
     }
 }
 
-const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, const sf::Vector2i &position, const LivingEntity::Direction &direction)
+const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, const sf::Vector2<double> &position, const LivingEntity::Direction &direction)
 {
     sf::Sprite       temp;
 
-    if (position.x < 0 || position.x > this->_width * this->_tileSize.x ||
-            position.y < 0 || position.y > this->_height * this->_tileSize.y)
+    double            limitX = position.x;
+    double            limitY = position.y;
+
+    if (direction == LivingEntity::Direction::UP || direction == LivingEntity::Direction::DOWN)
+        limitX += objectSprite->getTextureRect().width / 2;
+    if (direction == LivingEntity::Direction::DOWN)
+        limitY += objectSprite->getTextureRect().height;
+    if (direction == LivingEntity::Direction::LEFT || direction == LivingEntity::Direction::RIGHT)
+        limitY += objectSprite->getTextureRect().height / 2;
+    if (direction == LivingEntity::Direction::RIGHT)
+        limitX += objectSprite->getTextureRect().width / 2;
+    if (limitX < 0 || limitX > this->_width * this->_tileSize.x ||
+           limitY < 0 || limitY > this->_height * this->_tileSize.y)
     {
         std::cout << "OUT OF MAP" << std::endl;
         return (false);
