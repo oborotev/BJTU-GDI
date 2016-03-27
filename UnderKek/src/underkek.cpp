@@ -38,12 +38,15 @@ const int   Underkek::playerInit()
 
 const int   Underkek::init()
 {
+
+    _tiledef.fill(TilesetHandler::WALL);
+    _tiledef[9] = TilesetHandler::FREE;
     this->_graphicHandler = new GraphicHandler("Underkek", "../media/fonts/DTM-Mono.otf");
     this->_tilesetHandler = this->_graphicHandler->getBaseMap();
     this->_mediaHandler = this->_graphicHandler->getMediaHandler();
     this->_mediaHandler->addNewTexture("../media/textures/tileset.gif", "map_tileset");
     this->playerInit();
-    this->_tilesetHandler->init(this->_mediaHandler->getTexture("map_tileset"), sf::Vector2u(32, 32), "../media/maps/base", 0, 0);
+    this->_tilesetHandler->init(this->_mediaHandler->getTexture("map_tileset"), sf::Vector2u(32, 32), "../media/maps/base", 0, 0, _tiledef.data());
     return (0);
 }
 

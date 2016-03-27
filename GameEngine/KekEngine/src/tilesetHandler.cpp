@@ -74,22 +74,29 @@ const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, co
     double            limitX = position.x;
     double            limitY = position.y;
 
-    if (direction == LivingEntity::Direction::UP || direction == LivingEntity::Direction::DOWN)
-        limitX += objectSprite->getTextureRect().width / 2;
+    /*
+    //if (direction == LivingEntity::Direction::UP || direction == LivingEntity::Direction::DOWN)
+        //limitX += objectSprite->getTextureRect().width / 2;
     if (direction == LivingEntity::Direction::DOWN)
         limitY += objectSprite->getTextureRect().height;
-    if (direction == LivingEntity::Direction::LEFT || direction == LivingEntity::Direction::RIGHT)
+    if (direction == LivingEntity::Direction::RIGHT)
         limitY += objectSprite->getTextureRect().height / 2;
     if (direction == LivingEntity::Direction::RIGHT)
-        limitX += objectSprite->getTextureRect().width / 2;
+        limitX += objectSprite->getTextureRect().width / 2;*/
     if (limitX < 0 || limitX > this->_width * this->_tileSize.x ||
            limitY < 0 || limitY > this->_height * this->_tileSize.y)
-    {
-        std::cout << "OUT OF MAP" << std::endl;
         return (false);
-    }
     else
-        std::cout << "IN MAP" << std::endl;
+    {
+        limitX /= this->_tileSize.x;
+        //limitX += 0.5;
+        limitY /= this->_tileSize.y;
+        int tile_number = (int)limitX + (int)limitY * this->_width;
+        //limitY += 0.5;
+        std::cout << this->_tileDefinition[this->_tiles[tile_number]] << std::endl;
+        if (this->_tileDefinition[this->_tiles[tile_number]] == TilesetHandler::WALL)
+            return (true);
+    }
     return (false);
 }
 

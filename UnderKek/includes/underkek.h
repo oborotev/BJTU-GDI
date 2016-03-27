@@ -19,6 +19,7 @@ private:
     GraphicHandler *_graphicHandler;
     MediaHandler   *_mediaHandler;
     TilesetHandler *_tilesetHandler;
+    std::array<int, 171> _tiledef;
 };
 
 #endif //UNDERKEK_UNDERKEK_H
