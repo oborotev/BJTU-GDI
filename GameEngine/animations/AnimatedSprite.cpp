@@ -145,7 +145,7 @@ void AnimatedSprite::setFrame(std::size_t newFrame, bool resetTime)
         m_vertices[1].texCoords = sf::Vector2f(left, bottom);
         m_vertices[2].texCoords = sf::Vector2f(right, bottom);
         m_vertices[3].texCoords = sf::Vector2f(right, top);
-        this->m_spriteFrame->setTextureRect(sf::IntRect(left, right, top, bottom));
+        this->m_spriteFrame->setTextureRect(sf::IntRect(rect.left, rect.top, rect.width, rect.height));
     }
 
     if (resetTime)
