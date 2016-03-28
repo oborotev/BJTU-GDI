@@ -11,7 +11,7 @@ Underkek::~Underkek() {
 const int   Underkek::playerInit()
 {
     this->_mediaHandler->addNewTexture("../media/textures/frisk.png", "frisky");
-    this->_graphicHandler->initPlayer(200, 200, 20, 5.0, true, sf::seconds(0.2), this->_mediaHandler->getTexture("frisky"));
+    this->_graphicHandler->initPlayer(200, 200, 20, 2.5, true, sf::seconds(0.2), this->_mediaHandler->getTexture("frisky"));
     //Animation Still
     this->_graphicHandler->getPlayer()->addFrameState(LivingEntity::Direction::STILL, sf::IntRect(0, 0, 38, 57));
     //Animation UP
@@ -72,7 +72,6 @@ const int   Underkek::start() {
         this->_graphicHandler->drawBaseMap();
         this->_graphicHandler->getPlayer()->update(this->_graphicHandler->getClock()->getLastFrameTime());
         this->_graphicHandler->draw(*this->_graphicHandler->getPlayer()->getAnimation());
-        this->_graphicHandler->draw(*this->_graphicHandler->getPlayer()->getAnimation()->getSpriteFrame());
         this->_graphicHandler->loop();
     }
     return (0);

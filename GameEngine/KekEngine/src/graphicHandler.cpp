@@ -25,6 +25,7 @@ GraphicHandler::GraphicHandler(const std::string &title, const std::string &main
     this->_resizable = resizable;
     this->_keyStates.fill(false);
     this->_cameraOnEntity = NULL;
+    this->_playerMoved = false;
 }
 
 GraphicHandler::~GraphicHandler() {

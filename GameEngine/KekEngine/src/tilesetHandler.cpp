@@ -92,6 +92,7 @@ const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, co
     if (direction == LivingEntity::Direction::DOWN)
         limitY += objectSprite->getTextureRect().height;
     if (direction == LivingEntity::Direction::RIGHT)
+        limitX += objectSprite->getTextureRect().width;
     if (limitX < 0 || limitX > this->_width * this->_tileSize.x ||
            limitY < 0 || limitY > this->_height * this->_tileSize.y)
         return (false);
@@ -113,11 +114,11 @@ const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, co
             limitX = position.x / this->_tileSize.x;
             limitY = position.y / this->_tileSize.y;
             if (direction == LivingEntity::Direction::LEFT)
-                limitX = ((position.x + coefDivider) / this->_tileSize.x) - 1;
+                limitX = ((position.x + coefDivider) / this->_tileSize.x);
             if( direction == LivingEntity::Direction::RIGHT)
                 limitX = ((position.x + coefDivider) / this->_tileSize.x) + 1.5;
             if (direction == LivingEntity::Direction::UP)
-                limitY = ((position.y + coefDivider) / this->_tileSize.y) - 0.2;
+                limitY = ((position.y + coefDivider) / this->_tileSize.y);
             if (direction == LivingEntity::Direction::DOWN)
                 limitY = ((position.y + coefDivider) / this->_tileSize.y) + 1.5;
             tileNumber = (int)limitX + (int)limitY * this->_width;
@@ -131,11 +132,11 @@ const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, co
                 if (direction == LivingEntity::Direction::LEFT)
                     newPosition = (((tileNumber + i) % this->_width)) * this->_tileSize.x + 1;
                 else if (direction == LivingEntity::Direction::RIGHT)
-                    newPosition = ((tileNumber - i) % this->_width) * this->_tileSize.x - 5;
+                    newPosition = ((tileNumber - i) % this->_width) * this->_tileSize.x - 7;
                 else if (direction == LivingEntity::Direction::UP)
                     newPosition = ((tileNumber + (i * this->_width)) / this->_width) * this->_tileSize.y + 1;
                 else if (direction == LivingEntity::Direction::DOWN)
-                    newPosition = ((tileNumber - (i * this->_width)) / this->_width) * this->_tileSize.y - (this->_tileSize.y - 10);
+                    newPosition = ((tileNumber - (i * this->_width)) / this->_width) * this->_tileSize.y - 10;
                 if (entity)
                 {
                     if (direction == LivingEntity::Direction::LEFT || direction == LivingEntity::Direction::RIGHT)
