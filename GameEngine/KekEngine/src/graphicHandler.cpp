@@ -86,7 +86,7 @@ const int     GraphicHandler::init()
     if (this->_player)
     {
         this->_mainCamera->updatePositionCenter(this->_player->getX(), this->_player->getY());
-        this->_clockHUD->setPosXY(this->_mainCamera->getCenterX(), this->_mainCamera->getCenterY());
+        this->_clockHUD->setPosXY((this->_mainCamera->getCenterX() - (this->_modeWidth / 2)) + 800, (this->_mainCamera->getCenterY() - (this->_modeHeight / 2)) + 600);
     }
     this->_window->setView(*this->_mainCamera->getView());
     return (0);

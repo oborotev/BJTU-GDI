@@ -11,10 +11,10 @@ void            GraphicHandler::moveStaticObjects(const bool mode)
                 (this->_mainCamera->getCenterY() - (this->_modeHeight / 2)) +
                 it->second.offsets.y);
     }
-    if (!mode)
-        this->_clockHUD->setPosXY((this->_mainCamera->getCenterX() - (this->_modeWidth / 2)) + 800, (this->_mainCamera->getCenterY() - (this->_modeHeight / 2)) + 600);
-    else
-        this->_clockHUD->setPosXY(this->_mainCamera->getCenterX(), this->_mainCamera->getCenterY());
+    //if (!mode)
+    this->_clockHUD->setPosXY((this->_mainCamera->getCenterX() - (this->_modeWidth / 2)) + 800, (this->_mainCamera->getCenterY() - (this->_modeHeight / 2)) + 600);
+    //else
+        //this->_clockHUD->setPosXY(this->_mainCamera->getCenterX(), this->_mainCamera->getCenterY());
 }
 
 void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingEntity::Direction &direction, const bool &moveCamera, const bool &isPlayer)
