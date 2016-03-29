@@ -29,21 +29,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="graphicHandler.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="graphicHandler.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KekEngine/src/graphicHandler.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.83361924">
-              <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="106" column="26" selection-start-line="106" selection-start-column="26" selection-end-line="106" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="movementsEntities.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="movementsEntities.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/KekEngine/src/movementsEntities.cpp">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.96569467">
+              <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graphicHandler.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KekEngine/includes/graphicHandler.h">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="64" column="171" selection-start-line="64" selection-start-column="171" selection-end-line="64" selection-end-column="171" />
+              <caret line="74" column="31" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -69,16 +79,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="entity.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KekEngine/includes/entity.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="entity.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KekEngine/src/entity.cpp">
           <provider selected="true" editor-type-id="text-editor">
@@ -93,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/KekEngine/src/tilesetHandler.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="150" column="24" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="24" />
+              <caret line="91" column="51" selection-start-line="91" selection-start-column="51" selection-end-line="91" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -139,13 +139,14 @@
         <option value="$PROJECT_DIR$/KekEngine/includes/livingEntity.h" />
         <option value="$PROJECT_DIR$/KekEngine/includes/entity.h" />
         <option value="$PROJECT_DIR$/KekEngine/includes/tilesetHandler.h" />
-        <option value="$PROJECT_DIR$/KekEngine/src/movementsEntities.cpp" />
         <option value="$PROJECT_DIR$/KekEngine/src/entity.cpp" />
         <option value="$PROJECT_DIR$/KekEngine/src/livingEntity.cpp" />
         <option value="$PROJECT_DIR$/KekEngine/src/cameraHandler.cpp" />
         <option value="$PROJECT_DIR$/animations/AnimatedSprite.cpp" />
         <option value="$PROJECT_DIR$/KekEngine/src/tilesetHandler.cpp" />
+        <option value="$PROJECT_DIR$/KekEngine/includes/graphicHandler.h" />
         <option value="$PROJECT_DIR$/KekEngine/src/graphicHandler.cpp" />
+        <option value="$PROJECT_DIR$/KekEngine/src/movementsEntities.cpp" />
       </list>
     </option>
   </component>
@@ -533,34 +534,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KekEngine/src/cameraHandler.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="9" selection-start-line="96" selection-start-column="9" selection-end-line="96" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/animations/AnimatedSprite.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="145" column="48" selection-start-line="145" selection-start-column="48" selection-end-line="145" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KekEngine/src/movementsEntities.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="171" selection-start-line="64" selection-start-column="171" selection-end-line="64" selection-end-column="171" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KekEngine/src/livingEntity.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -573,18 +550,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/KekEngine/src/livingEntity.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KekEngine/src/cameraHandler.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="96" column="9" selection-start-line="96" selection-start-column="9" selection-end-line="96" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/KekEngine/src/tilesetHandler.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="150" column="24" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="24" />
+          <caret line="91" column="51" selection-start-line="91" selection-start-column="51" selection-end-line="91" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KekEngine/includes/graphicHandler.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="31" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/KekEngine/src/graphicHandler.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.83361924">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="106" column="26" selection-start-line="106" selection-start-column="26" selection-end-line="106" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KekEngine/src/movementsEntities.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.96569467">
+          <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
           <folding />
         </state>
       </provider>

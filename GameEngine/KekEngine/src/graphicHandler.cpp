@@ -26,6 +26,7 @@ GraphicHandler::GraphicHandler(const std::string &title, const std::string &main
     this->_keyStates.fill(false);
     this->_cameraOnEntity = NULL;
     this->_playerMoved = false;
+    this->_calledToMove = false;
 }
 
 GraphicHandler::~GraphicHandler() {
@@ -103,6 +104,7 @@ void     GraphicHandler::loop()
     if (!_playerMoved && _player)
         this->_player->changeDirection(LivingEntity::Direction::STILL);
     _playerMoved = false;
+    _calledToMove = false;
     this->_window->setView(*this->_mainCamera->getView());
     this->_window->display();
     this->_window->clear(sf::Color::Black);
