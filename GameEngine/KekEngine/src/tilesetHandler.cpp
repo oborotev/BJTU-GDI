@@ -147,9 +147,9 @@ const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, co
                 if (camera)
                 {
                     if (direction == LivingEntity::Direction::LEFT || direction == LivingEntity::Direction::RIGHT)
-                        camera->updatePositionCenter(newPosition, camera->getCenterY());
+                        camera->updatePositionCenter(newPosition, (float)camera->getCenterY());
                     else
-                        camera->updatePositionCenter(camera->getCenterX(), newPosition);
+                        camera->updatePositionCenter((float)camera->getCenterX(), newPosition);
                 }
                 return (true);
             }
