@@ -73,7 +73,7 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
         entity->move(coef, 0);
         moved = true;
     }
-    if (direction == direction == LivingEntity::Direction::RIGHT || direction == LivingEntity::Direction::LEFT || direction == LivingEntity::Direction::UP || direction == LivingEntity::Direction::DOWN)
+    if (direction == LivingEntity::Direction::RIGHT || direction == LivingEntity::Direction::LEFT || direction == LivingEntity::Direction::UP || direction == LivingEntity::Direction::DOWN)
         _calledToMove = true;
     if (isPlayer)
     {
