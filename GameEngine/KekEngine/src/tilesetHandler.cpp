@@ -122,7 +122,6 @@ const bool           TilesetHandler::checkCollision(sf::Sprite* objectSprite, co
             if (direction == LivingEntity::Direction::DOWN)
                 limitY = ((position.y + coefDivider) / this->_tileSize.y) + 2;
             tileNumber = (int)limitX + (int)limitY * this->_width;
-            std::cout << tileNumber << std::endl;
             if (this->_tileDefinition[this->_tiles[tileNumber + i]] == TilesetHandler::WALL)
             {
                 double newPosition = 0;
