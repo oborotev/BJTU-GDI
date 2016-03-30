@@ -1,3 +1,4 @@
 [base]
 collision 0 0 200 200
-player 0 0
+sprite test 0 0 1.0
+player 200 200
