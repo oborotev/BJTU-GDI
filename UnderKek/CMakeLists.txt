@@ -6,8 +6,6 @@ set(EXECUTABLE_NAME UnderKek)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-#BOX2D
-include_directories(BEFORE ${BOX2D_INCLUDE_DIRS})
 #My include dirs
 include_directories(BEFORE ${MY_SOURCE_DIR}includes/)
 
