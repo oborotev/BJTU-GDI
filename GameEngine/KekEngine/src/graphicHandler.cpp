@@ -92,7 +92,11 @@ const int     GraphicHandler::init(const bool isPhysics, const sf::Vector2f &gra
     if (this->_isPhysics)
     {
         this->_physics = new PhysicsHandler();
-        this->_physics->init(gravity);
+        if (!this->_physics->init(gravity))
+        {
+            std::cout << "Couldn't initialize the physics engine" << std::endl;
+            return (1);
+        }
     }
     this->_window->setView(*this->_mainCamera->getView());
     return (0);

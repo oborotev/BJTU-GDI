@@ -10,12 +10,15 @@
 # include <map>
 # include <string>
 
+# define RATIO 30.0f
+
 class PhysicsHandler
 {
 public:
     const bool init(const sf::Vector2f &gravity);
     void    registerNewBody(b2Body *body, const std::string &name);
     b2Body *getBody(const std::string &name);
+    b2World *getWorld() const;
     void terminate();
 private:
     b2World *_world;

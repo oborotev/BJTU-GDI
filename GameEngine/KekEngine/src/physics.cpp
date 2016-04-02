@@ -27,3 +27,8 @@ b2Body  *PhysicsHandler::getBody(const std::string &name)
 {
     return (this->_bodies[name]);
 }
+
+b2World *PhysicsHandler::getWorld() const
+{
+    return (this->_world);
+}
