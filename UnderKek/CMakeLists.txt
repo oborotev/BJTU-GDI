@@ -6,6 +6,9 @@ set(EXECUTABLE_NAME UnderKek)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+#BOX2D
+include_directories(BEFORE ${BOX2D_INCLUDE_DIRS})
+#My include dirs
 include_directories(BEFORE ${MY_SOURCE_DIR}includes/)
 
 # Include cmake KekEngine
@@ -22,4 +25,8 @@ add_executable(UnderKek ${KEKENGINE_SRC} ${COLLISIONS_SRC} ${ANIMATIONS_SRC}  ${
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../common/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED system window graphics network audio)
 target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+
+#BOX2D
+find_package(Box2D)
+target_link_libraries(${EXECUTABLE_NAME} ${BOX2D_LIBRARIES})
 
