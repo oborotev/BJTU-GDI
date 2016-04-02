@@ -36,8 +36,8 @@ public:
     void        terminate();
     void        drawBaseMap() const;
     const bool  getIsAlive();
-    TilesetHandler* getBaseMap();
-    MediaHandler*   getMediaHandler();
+    TilesetHandler* getBaseMap() const;
+    MediaHandler*   getMediaHandler() const;
     //Events
     const bool  pollEvent();
     const bool  eventTriggered(const sf::Event::EventType& eventType);
@@ -56,6 +56,8 @@ public:
     //Player
     void        initPlayer(const int &x, const int &y, const int &hp, const float &speed=10.0, const bool animated=false, const sf::Time &animationSpeed=sf::Time::Zero, sf::Texture *spriteSheet=NULL, const bool focusCamera=true);
     Player*     getPlayer() const;
+    //Physics
+    PhysicsHandler     *getPhysicsHandler() const;
     //CLock
     sfx::FrameClock* getClock() const;
     //Mutex

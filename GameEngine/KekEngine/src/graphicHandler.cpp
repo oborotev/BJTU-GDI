@@ -40,12 +40,12 @@ GraphicHandler::~GraphicHandler() {
         delete this->_player;
 }
 
-TilesetHandler*     GraphicHandler::getBaseMap()
+TilesetHandler*     GraphicHandler::getBaseMap() const
 {
     return (this->_baseMap);
 }
 
-MediaHandler*       GraphicHandler::getMediaHandler()
+MediaHandler*       GraphicHandler::getMediaHandler() const
 {
     return (this->_mediaHandler);
 }
@@ -191,4 +191,9 @@ sfx::FrameClock* GraphicHandler::getClock() const
 Player* GraphicHandler::getPlayer() const
 {
     return (this->_player);
+}
+
+PhysicsHandler* GraphicHandler::getPhysicsHandler() const
+{
+    return (this->_physics);
 }

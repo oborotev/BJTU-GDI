@@ -15,11 +15,14 @@ public:
     const int   init();
     const int   start();
     const int   playerInit();
+    const int   wanderlust();
 private:
     GraphicHandler *_graphicHandler;
     MediaHandler   *_mediaHandler;
     TilesetHandler *_tilesetHandler;
+    PhysicsHandler *_physicsHandler;
     std::array<int, 171> _tiledef;
+    bool            _combatMode;
 };
 
 #endif //UNDERKEK_UNDERKEK_H

@@ -6,6 +6,7 @@
 
 void  PhysicsHandler::terminate()
 {
+    this->_bodies.clear();
     delete this->_world;
 }
 
@@ -15,4 +16,14 @@ const bool  PhysicsHandler::init(const sf::Vector2f &gravity)
     if (this->_world == nullptr)
         return (false);
     return (true);
+}
+
+void    PhysicsHandler::registerNewBody(b2Body *body, const std::string &name)
+{
+    this->_bodies[name] = body;
+}
+
+b2Body  *PhysicsHandler::getBody(const std::string &name)
+{
+    return (this->_bodies[name]);
 }
