@@ -15,6 +15,7 @@
 # include "clockHUD.h"
 # include "cameraHandler.h"
 # include "player.h"
+# include "physics.h"
 
 class GraphicHandler
 {
@@ -29,7 +30,7 @@ public:
 public:
     GraphicHandler(const std::string &title, const std::string &mainFontPath, unsigned int modeWidth = 1024, unsigned int modeHeight = 768, const bool resizable=false, const bool cameraDelimited=false, const sf::IntRect &cameraDelimitation=sf::IntRect(0, 0, 0, 0), unsigned int modeBitsPerPixel=0, const bool fixedSize = true, const bool fpsDebug = false, const float cameraSpeed=10.0);
     ~GraphicHandler();
-    const int   init();
+    const int   init(const bool isPhysics=true, const sf::Vector2f &gravity=sf::Vector2f(0.f, 9.8f));
     void        loop();
     void        launch();
     void        terminate();
@@ -95,6 +96,9 @@ private:
     //Player
     Player*         _player;
     bool            _playerMoved;
+    //Physics
+    bool            _isPhysics;
+    PhysicsHandler*  _physics;
     //Fonts
     std::string      _mainFontPath;
     sf::Font         _mainFont;
