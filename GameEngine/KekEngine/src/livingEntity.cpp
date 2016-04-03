@@ -107,8 +107,10 @@ b2Body      *LivingEntity::getBody() const
     return (this->_body.first);
 }
 
-void        LivingEntity::updateBody()
+void        LivingEntity::updateBody(const bool disableAngularVelocity)
 {
+    if (disableAngularVelocity)
+        this->_body.first->SetAngularVelocity(0);
     this->_x = this->_body.first->GetPosition().x;
     this->_y = this->_body.first->GetPosition().y;
     this->_body.second->setOrigin(8.f, 8.f);

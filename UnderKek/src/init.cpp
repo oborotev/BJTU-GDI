@@ -85,7 +85,7 @@ const int Underkek::initCombatMode()
     this->_physicsHandler->registerNewBody(this->_physicsHandler->getWorld()->CreateBody(&soulDef), "player_soul");
 
     b2PolygonShape boxShape;
-    boxShape.SetAsBox(8, 8);
+    boxShape.SetAsBox(9, 9);
     b2FixtureDef soulFixtureDef;
     soulFixtureDef.density = 1.0f;
     soulFixtureDef.friction = 1000.f;
