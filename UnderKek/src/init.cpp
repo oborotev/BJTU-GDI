@@ -80,7 +80,7 @@ const int Underkek::initCombatMode()
 
     /* Soul */
     b2BodyDef soulDef;
-    soulDef.type = b2_staticBody;
+    soulDef.type = b2_kinematicBody;
     soulDef.position = b2Vec2(500, 475);
     this->_physicsHandler->registerNewBody(this->_physicsHandler->getWorld()->CreateBody(&soulDef), "player_soul");
 
@@ -88,7 +88,6 @@ const int Underkek::initCombatMode()
     boxShape.SetAsBox(16, 16);
     b2FixtureDef soulFixtureDef;
     soulFixtureDef.density = 1.0f;
-    soulFixtureDef.friction = 0.7f;
     soulFixtureDef.shape = &boxShape;
     this->_physicsHandler->getBody("player_soul")->CreateFixture(&soulFixtureDef);
     this->_graphicHandler->getPlayer()->setPhysicBody(this->_physicsHandler->getBody("player_soul"), this->_mediaHandler->getSprite("player_soul"));

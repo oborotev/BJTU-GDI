@@ -87,11 +87,11 @@ void        GraphicHandler::moveLivingEntityBody(LivingEntity *entity, const Liv
     float        entityY = entity->getY();
 
     if (direction == LivingEntity::Direction::UP)
-        entity->moveBody(sf::Vector2f(0, -coef / 2));
+        entity->moveBody(sf::Vector2f(0, -coef));
     else if (direction == LivingEntity::Direction::DOWN)
         entity->moveBody(sf::Vector2f(0, coef));
     else if (direction == LivingEntity::Direction::RIGHT)
         entity->moveBody(sf::Vector2f(coef, 0));
     else if (direction == LivingEntity::Direction::LEFT)
-        entity->moveBody(sf::Vector2f(-coef/2, 0));
+        entity->moveBody(sf::Vector2f(-coef, 0));
 }

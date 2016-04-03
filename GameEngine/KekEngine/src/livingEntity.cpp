@@ -117,7 +117,7 @@ void        LivingEntity::updateBody()
 
 void        LivingEntity::moveBody(const sf::Vector2f &vector)
 {
-    this->_body.first->SetTransform(b2Vec2(this->_x + vector.x, this->_y + vector.y), this->_body.first->GetAngle());
     this->_x += vector.x;
     this->_y += vector.y;
+    this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, vector.y * 30));
 }
