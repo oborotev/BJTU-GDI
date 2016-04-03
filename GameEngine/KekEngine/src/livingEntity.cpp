@@ -79,3 +79,24 @@ const float &LivingEntity::getSpeed() const
 {
   return this->_speed;
 }
+
+void        LivingEntity::setPhysicBody(b2Body *body, sf::Sprite *sprite)
+{
+    this->_body = std::make_pair(body, sprite);
+}
+
+sf::Sprite *LivingEntity::getBodySprite() const
+{
+    return (this->_body.second);
+}
+
+b2Body      *LivingEntity::getBody() const
+{
+    return (this->_body.first);
+}
+
+void        LivingEntity::updateBody()
+{
+    this->_body.second->setPosition(this->_body.first->GetPosition().x, this->_body.first->GetPosition().y);
+    this->_body.second->setRotation(180/b2_pi * this->_body.first->GetAngle());
+}

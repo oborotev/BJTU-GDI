@@ -91,4 +91,5 @@ const int Underkek::initCombatMode()
     soulFixtureDef.friction = 0.7f;
     soulFixtureDef.shape = &boxShape;
     this->_physicsHandler->getBody("player_soul")->CreateFixture(&soulFixtureDef);
+    this->_graphicHandler->getPlayer()->setPhysicBody(this->_physicsHandler->getBody("player_soul"), this->_mediaHandler->getSprite("player_soul"));
 }

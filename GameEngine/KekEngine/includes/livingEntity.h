@@ -8,6 +8,7 @@
 # include "entity.h"
 # include "Animation.hpp"
 # include "AnimatedSprite.hpp"
+# include "physics.h"
 # include <array>
 
 class LivingEntity : public Entity
@@ -28,11 +29,15 @@ public:
     void    changeDirection(const LivingEntity::Direction &direction);
     void    move(const float &x, const float &y);
     void    setPosition(const double &x, const double &y);
+    void    setPhysicBody(b2Body *body, sf::Sprite *sprite);
     virtual void    setY(const float &y);
     virtual void    setX(const float &x);
     void    update(const sf::Time &time);
     const float &getSpeed() const;
     AnimatedSprite* getAnimation() const;
+    sf::Sprite      *getBodySprite() const;
+    b2Body*         getBody() const;
+    void            updateBody();
 protected:
     int _hp;
     bool _animated;
@@ -41,6 +46,7 @@ protected:
     std::array<Animation*, LivingEntity::DirectionCount> _animations;
     AnimatedSprite *_animation;
     Direction _direction;
+    std::pair<b2Body *, sf::Sprite *> _body;
 };
 
 #endif //MAPEDITINGTOOL_LIVINGENTITY_H

@@ -35,9 +35,8 @@ const int   Underkek::start() {
             this->_physicsHandler->getWorld()->Step(1/60.f, 8, 3);
             if (!this->_combatMode)
                 this->_graphicHandler->drawPolygonFromFixtures(this->_physicsHandler->getBody("combat_box")->GetFixtureList());//this->wanderlust();
-            this->_mediaHandler->getSprite("player_soul")->setPosition(this->_physicsHandler->getBody("player_soul")->GetPosition().x, this->_physicsHandler->getBody("player_soul")->GetPosition().y);
-            this->_mediaHandler->getSprite("player_soul")->setRotation(180/b2_pi * this->_physicsHandler->getBody("player_soul")->GetAngle());
-            this->_graphicHandler->draw(*this->_mediaHandler->getSprite("player_soul"));
+            this->_graphicHandler->getPlayer()->updateBody();
+            this->_graphicHandler->draw(*this->_graphicHandler->getPlayer()->getBodySprite());
             this->_graphicHandler->loop();
         }
     }
