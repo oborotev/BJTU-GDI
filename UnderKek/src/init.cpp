@@ -62,6 +62,7 @@ const int Underkek::initCombatMode()
     b2BodyDef myBodyDef;
     myBodyDef.type = b2_staticBody;
     myBodyDef.position.Set(0, 0);
+    myBodyDef.userData = (void *)new sf::Vector2f(1024/2, 500);
     this->_physicsHandler->registerNewBody(this->_physicsHandler->getWorld()->CreateBody(&myBodyDef), "combat_box");
     //shape definition
     b2PolygonShape polygonShape;
@@ -81,7 +82,7 @@ const int Underkek::initCombatMode()
     /* Soul */
     b2BodyDef soulDef;
     soulDef.type = b2_dynamicBody;
-    soulDef.position = b2Vec2(500, 475);
+    soulDef.position = b2Vec2(1024/2, 500);
     this->_physicsHandler->registerNewBody(this->_physicsHandler->getWorld()->CreateBody(&soulDef), "player_soul");
 
     b2PolygonShape boxShape;

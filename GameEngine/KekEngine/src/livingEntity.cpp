@@ -127,7 +127,7 @@ void        LivingEntity::moveBody(const sf::Vector2f &vector, b2Body* constrain
 
     if (this->_body.first->GetContactList() == NULL)
     {
-        if (vector.x)
+        if (vector.x != 0)
             this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, this->_body.first->GetLinearVelocity().y));
         else
             this->_body.first->SetLinearVelocity(b2Vec2(this->_body.first->GetLinearVelocity().x, vector.y * 30));
@@ -138,8 +138,13 @@ void        LivingEntity::moveBody(const sf::Vector2f &vector, b2Body* constrain
             if (ce->other == constraint)
             {
                 if (vector.y)
-                    this->_body.first->SetLinearVelocity(b2Vec2(0, vector.y * 30));
-                else
+                {
+                    if (this->_body.first->GetLinearVelocity().x < 0)
+                        this->_body.first->SetLinearVelocity(b2Vec2(0, vector.y * 30));
+                    else
+                        this->_body.first->SetLinearVelocity(b2Vec2(this->_body.first->GetLinearVelocity().x, vector.y * 30));
+                }
+               else
                     this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, 0));
             }
     }
