@@ -17,7 +17,6 @@ public:
     const int   playerInit();
     const int   wanderlust();
     const int   initCombatMode();
-    void        drawPolygon(b2Fixture* vertices, int32 vertexCount);
 private:
     GraphicHandler *_graphicHandler;
     MediaHandler   *_mediaHandler;

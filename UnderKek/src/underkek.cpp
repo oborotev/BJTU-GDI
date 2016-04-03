@@ -53,29 +53,12 @@ const int   Underkek::init()
         return 1;
     }
     this->_physicsHandler = this->_graphicHandler->getPhysicsHandler();
+    this->_graphicHandler->getCamera()->updatePositionCenter(1024/2, 768/2);
     this->initCombatMode();
     return (0);
 }
 
-void Underkek::drawPolygon(b2Fixture*  fixtures, int32 vertexCount)
-{
-    for (b2Fixture* f = fixtures; f; f = f->GetNext())
-    {
-        sf::ConvexShape polygon;
-        polygon.setPointCount(4);
-        b2PolygonShape* polygonShape = (b2PolygonShape*)f->GetShape();
-        for (int i=0; i < polygonShape->GetVertexCount(); i++)
-        {
-            //std::cout << i << std::endl;
-            b2Vec2 vertex = polygonShape->GetVertex(i);
-            polygon.setPoint(i, sf::Vector2f(vertex.x*RATIO, vertex.y*RATIO));
-            std::cout << vertex.x*RATIO << std::endl;
-        }
-        polygon.setOutlineThickness(1.0f);
-        polygon.setFillColor(sf::Color::White);
-        this->_graphicHandler->draw(polygon);
-    }
-}
+
 
 const int Underkek::initCombatMode()
 {
@@ -89,13 +72,13 @@ const int Underkek::initCombatMode()
     b2FixtureDef myFixtureDef;
     myFixtureDef.shape = &polygonShape;
     //add four walls to the static body
-    polygonShape.SetAsBox(92/RATIO, 2.5/RATIO, b2Vec2(0, 0), 0);//ground
+    polygonShape.SetAsBox(92/RATIO, 2.5/RATIO, b2Vec2(1024/2/RATIO, 400/RATIO), 0);//ground
     this->_physicsHandler->getBody("combat_box")->CreateFixture(&myFixtureDef);
-    polygonShape.SetAsBox(92/RATIO, 2.5/RATIO, b2Vec2(0, 6), 0);//ceiling
+    polygonShape.SetAsBox(92/RATIO, 2.5/RATIO, b2Vec2(1024/2/RATIO, 600/RATIO), 0);//ceiling
     this->_physicsHandler->getBody("combat_box")->CreateFixture(&myFixtureDef);
-    polygonShape.SetAsBox(2.5/RATIO, 92/RATIO, b2Vec2(-3, 3), 0);//left wall
+    polygonShape.SetAsBox(2.5/RATIO, 102.5/RATIO, b2Vec2(417/RATIO, 500/RATIO), 0);//left wall
     this->_physicsHandler->getBody("combat_box")->CreateFixture(&myFixtureDef);
-    polygonShape.SetAsBox(2.5/RATIO, 92/RATIO, b2Vec2(3, 3), 0);//right wall
+    polygonShape.SetAsBox(2.5/RATIO, 102.5/RATIO, b2Vec2(608/RATIO, 500/RATIO), 0);//right wall
     this->_physicsHandler->getBody("combat_box")->CreateFixture(&myFixtureDef);
 }
 
@@ -124,8 +107,7 @@ const int   Underkek::start() {
                 this->_graphicHandler->terminate();
         if (this->_graphicHandler->getIsAlive()) {
             if (!this->_combatMode)
-                this->drawPolygon(this->_physicsHandler->getBody("combat_box")->GetFixtureList(),
-                                  0);//this->wanderlust();
+                this->_graphicHandler->drawPolygonFromFixtures(this->_physicsHandler->getBody("combat_box")->GetFixtureList());//this->wanderlust();
             this->_graphicHandler->loop();
         }
     }

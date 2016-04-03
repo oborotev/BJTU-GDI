@@ -58,6 +58,8 @@ public:
     Player*     getPlayer() const;
     //Physics
     PhysicsHandler     *getPhysicsHandler() const;
+    //Drawing
+    void        drawPolygonFromFixtures(b2Fixture* fixtures);
     //CLock
     sfx::FrameClock* getClock() const;
     //Mutex
