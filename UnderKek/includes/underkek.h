@@ -16,6 +16,7 @@ public:
     const int   start();
     const int   playerInit();
     const int   wanderlust();
+    const int   combat();
     const int   initCombatMode();
 private:
     GraphicHandler *_graphicHandler;

@@ -3,6 +3,7 @@
 //
 
 # include "livingEntity.h"
+# include <iostream>
 
 LivingEntity::LivingEntity(const int &x, const int &y, const int &hp, const float &speed, const bool animated, const sf::Time &animationSpeed, sf::Texture *spriteSheet) : Entity(x, y)
 {
@@ -51,6 +52,12 @@ void    LivingEntity::setPosition(const double &x, const double &y)
     this->_animation->setPosition(x, y);
 }
 
+void    LivingEntity::setXYstandalone(const double &x, const double &y)
+{
+    this->_x = x;
+    this->_y = y;
+}
+
 void    LivingEntity::changeDirection(const LivingEntity::Direction &direction)
 {
     this->_direction = direction;
@@ -80,6 +87,11 @@ const float &LivingEntity::getSpeed() const
   return this->_speed;
 }
 
+void        LivingEntity::setSpeed(const float &speed)
+{
+    this->_speed = speed;
+}
+
 void        LivingEntity::setPhysicBody(b2Body *body, sf::Sprite *sprite)
 {
     this->_body = std::make_pair(body, sprite);
@@ -97,6 +109,15 @@ b2Body      *LivingEntity::getBody() const
 
 void        LivingEntity::updateBody()
 {
+    this->_x = this->_body.first->GetPosition().x;
+    this->_y = this->_body.first->GetPosition().y;
     this->_body.second->setPosition(this->_body.first->GetPosition().x, this->_body.first->GetPosition().y);
     this->_body.second->setRotation(180/b2_pi * this->_body.first->GetAngle());
+}
+
+void        LivingEntity::moveBody(const sf::Vector2f &vector)
+{
+    this->_body.first->SetTransform(b2Vec2(this->_x + vector.x, this->_y + vector.y), this->_body.first->GetAngle());
+    this->_x += vector.x;
+    this->_y += vector.y;
 }

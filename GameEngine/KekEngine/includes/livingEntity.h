@@ -32,12 +32,15 @@ public:
     void    setPhysicBody(b2Body *body, sf::Sprite *sprite);
     virtual void    setY(const float &y);
     virtual void    setX(const float &x);
+    void    setXYstandalone(const double &x, const double &y);
+    void    setSpeed(const float &speed);
     void    update(const sf::Time &time);
     const float &getSpeed() const;
     AnimatedSprite* getAnimation() const;
     sf::Sprite      *getBodySprite() const;
     b2Body*         getBody() const;
     void            updateBody();
+    void            moveBody(const sf::Vector2f &vector);
 protected:
     int _hp;
     bool _animated;
