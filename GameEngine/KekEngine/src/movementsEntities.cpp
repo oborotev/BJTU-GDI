@@ -79,7 +79,7 @@ void        GraphicHandler::moveLivingEntity(LivingEntity *entity, const LivingE
     }
 }
 
-void        GraphicHandler::moveLivingEntityBody(LivingEntity *entity, const LivingEntity::Direction &direction, const bool &moveCamera, const bool &isPlayer)
+void        GraphicHandler::moveLivingEntityBody(LivingEntity *entity, const LivingEntity::Direction &direction, b2Body* constraint, const bool &moveCamera, const bool &isPlayer)
 {
     double       coef = (entity->getSpeed() * 0.1) * this->_clock->getLastFrameTime().asMilliseconds();
     bool         moved = false;
@@ -87,11 +87,11 @@ void        GraphicHandler::moveLivingEntityBody(LivingEntity *entity, const Liv
     float        entityY = entity->getY();
 
     if (direction == LivingEntity::Direction::UP)
-        entity->moveBody(sf::Vector2f(0, -coef));
+        entity->moveBody(sf::Vector2f(0, -coef), constraint);
     else if (direction == LivingEntity::Direction::DOWN)
-        entity->moveBody(sf::Vector2f(0, coef));
+        entity->moveBody(sf::Vector2f(0, coef), constraint);
     else if (direction == LivingEntity::Direction::RIGHT)
-        entity->moveBody(sf::Vector2f(coef, 0));
+        entity->moveBody(sf::Vector2f(coef, 0), constraint);
     else if (direction == LivingEntity::Direction::LEFT)
-        entity->moveBody(sf::Vector2f(-coef, 0));
+        entity->moveBody(sf::Vector2f(-coef, 0), constraint);
 }

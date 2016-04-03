@@ -40,7 +40,7 @@ public:
     sf::Sprite      *getBodySprite() const;
     b2Body*         getBody() const;
     void            updateBody(const bool disableAngularVelocity=true);
-    void            moveBody(const sf::Vector2f &vector);
+    void            moveBody(const sf::Vector2f &vector, b2Body* constraint);
 protected:
     int _hp;
     bool _animated;

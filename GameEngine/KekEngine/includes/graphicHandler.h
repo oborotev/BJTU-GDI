@@ -58,7 +58,7 @@ public:
     Player*     getPlayer() const;
     //Physics
     PhysicsHandler     *getPhysicsHandler() const;
-    void        moveLivingEntityBody(LivingEntity *entity, const LivingEntity::Direction &direction, const bool &moveCamera=false, const bool &isPlayer=false);
+    void        moveLivingEntityBody(LivingEntity *entity, const LivingEntity::Direction &direction, b2Body* constraint, const bool &moveCamera=false, const bool &isPlayer=false);
     //Drawing
     void        drawPolygonFromFixtures(b2Fixture* fixtures);
     //CLock

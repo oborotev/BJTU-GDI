@@ -29,13 +29,13 @@ const int   Underkek::combat()
 {
     this->_graphicHandler->getPlayer()->setSpeed(1.5);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::LEFT);
+        this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::LEFT, this->_physicsHandler->getBody("combat_box"));
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::RIGHT);
+        this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::RIGHT, this->_physicsHandler->getBody("combat_box"));
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::UP);
+        this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::UP, this->_physicsHandler->getBody("combat_box"));
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::DOWN);
+        this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::DOWN, this->_physicsHandler->getBody("combat_box"));
     this->_graphicHandler->drawPolygonFromFixtures(this->_physicsHandler->getBody("combat_box")->GetFixtureList());
     this->_graphicHandler->getPlayer()->updateBody();
     this->_graphicHandler->draw(*this->_graphicHandler->getPlayer()->getBodySprite());

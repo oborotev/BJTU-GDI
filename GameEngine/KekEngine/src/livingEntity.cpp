@@ -120,12 +120,27 @@ void        LivingEntity::updateBody(const bool disableAngularVelocity)
     this->_body.second->setRotation(180/b2_pi * this->_body.first->GetAngle());
 }
 
-void        LivingEntity::moveBody(const sf::Vector2f &vector)
+void        LivingEntity::moveBody(const sf::Vector2f &vector, b2Body* constraint)
 {
     this->_x += vector.x;
     this->_y += vector.y;
-    if (vector.x)
-        this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, this->_body.first->GetLinearVelocity().y));
+
+    if (this->_body.first->GetContactList() == NULL)
+    {
+        if (vector.x)
+            this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, this->_body.first->GetLinearVelocity().y));
+        else
+            this->_body.first->SetLinearVelocity(b2Vec2(this->_body.first->GetLinearVelocity().x, vector.y * 30));
+    }
     else
-        this->_body.first->SetLinearVelocity(b2Vec2(this->_body.first->GetLinearVelocity().x, vector.y * 30));
+    {
+        for (b2ContactEdge* ce = this->_body.first->GetContactList(); ce; ce = ce->next)
+            if (ce->other == constraint)
+            {
+                if (vector.y)
+                    this->_body.first->SetLinearVelocity(b2Vec2(0, vector.y * 30));
+                else
+                    this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, 0));
+            }
+    }
 }
