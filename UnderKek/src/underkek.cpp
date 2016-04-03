@@ -51,6 +51,7 @@ const int   Underkek::start() {
                 this->_graphicHandler->terminate();
         if (this->_graphicHandler->getIsAlive()) {
             this->_physicsHandler->getWorld()->Step(1/60.f, 8, 3);
+            this->_graphicHandler->getPlayer()->getBody()->SetLinearVelocity(b2Vec2(0,0));
             if (!this->_combatMode)
                 this->combat();//this->wanderlust();
             this->_graphicHandler->loop();

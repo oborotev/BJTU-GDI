@@ -111,6 +111,7 @@ void        LivingEntity::updateBody()
 {
     this->_x = this->_body.first->GetPosition().x;
     this->_y = this->_body.first->GetPosition().y;
+    this->_body.second->setOrigin(8.f, 8.f);
     this->_body.second->setPosition(this->_body.first->GetPosition().x, this->_body.first->GetPosition().y);
     this->_body.second->setRotation(180/b2_pi * this->_body.first->GetAngle());
 }
@@ -119,5 +120,8 @@ void        LivingEntity::moveBody(const sf::Vector2f &vector)
 {
     this->_x += vector.x;
     this->_y += vector.y;
-    this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, vector.y * 30));
+    if (vector.x)
+        this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, this->_body.first->GetLinearVelocity().y));
+    else
+        this->_body.first->SetLinearVelocity(b2Vec2(this->_body.first->GetLinearVelocity().x, vector.y * 30));
 }
