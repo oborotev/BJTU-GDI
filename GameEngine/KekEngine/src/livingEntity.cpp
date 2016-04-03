@@ -139,13 +139,22 @@ void        LivingEntity::moveBody(const sf::Vector2f &vector, b2Body* constrain
             {
                 if (vector.y)
                 {
-                    if (this->_body.first->GetLinearVelocity().x < 0)
+                    if (this->_body.first->GetLinearVelocity().x < 0 && (ce->contact->GetFixtureA()->GetAABB(0).GetCenter().x < this->_x && ce->contact->GetFixtureA()->GetAABB(0).GetCenter().x > this->_x - 20))
+                        this->_body.first->SetLinearVelocity(b2Vec2(0, vector.y * 30));
+                    else if (this->_body.first->GetLinearVelocity().x > 0 && (ce->contact->GetFixtureA()->GetAABB(0).GetCenter().x > this->_x && ce->contact->GetFixtureA()->GetAABB(0).GetCenter().x < this->_x + 20))
                         this->_body.first->SetLinearVelocity(b2Vec2(0, vector.y * 30));
                     else
                         this->_body.first->SetLinearVelocity(b2Vec2(this->_body.first->GetLinearVelocity().x, vector.y * 30));
                 }
                else
-                    this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, 0));
+                {
+                    if (this->_body.first->GetLinearVelocity().y < 0 && (ce->contact->GetFixtureA()->GetAABB(0).GetCenter().y < this->_y && ce->contact->GetFixtureA()->GetAABB(0).GetCenter().y > this->_y - 20))
+                        this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, 0));
+                    else if (this->_body.first->GetLinearVelocity().y > 0 && (ce->contact->GetFixtureA()->GetAABB(0).GetCenter().y > this->_y && ce->contact->GetFixtureA()->GetAABB(0).GetCenter().y < this->_y + 20))
+                        this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, 0));
+                    else
+                        this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, this->_body.first->GetLinearVelocity().y));
+                }
             }
     }
 }
