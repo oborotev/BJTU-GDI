@@ -69,6 +69,7 @@ const int Underkek::initCombatMode()
     //fixture definition
     b2FixtureDef myFixtureDef;
     myFixtureDef.shape = &polygonShape;
+    myFixtureDef.friction = 0;
     //add four walls to the static body
     polygonShape.SetAsBox(92, 2.5, b2Vec2(1024/2, 400), 0);//ground
     this->_physicsHandler->getBody("combat_box")->CreateFixture(&myFixtureDef);
