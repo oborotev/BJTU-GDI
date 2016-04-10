@@ -122,9 +122,6 @@ void        LivingEntity::updateBody(const bool disableAngularVelocity)
 
 void        LivingEntity::moveBody(const sf::Vector2f &vector, b2Body* constraint)
 {
-    this->_x += vector.x;
-    this->_y += vector.y;
-
     if (vector.x != 0)
         this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, this->_body.first->GetLinearVelocity().y));
     else
