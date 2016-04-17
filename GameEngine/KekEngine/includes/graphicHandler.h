@@ -16,6 +16,7 @@
 # include "cameraHandler.h"
 # include "player.h"
 # include "physics.h"
+# include "boxAnimations.h"
 
 class GraphicHandler
 {
@@ -104,6 +105,8 @@ private:
     //Physics
     bool            _isPhysics;
     PhysicsHandler*  _physics;
+    //BoxAnimations
+    BoxAnimations*   _boxAnimationsHandler;
     //Fonts
     std::string      _mainFontPath;
     sf::Font         _mainFont;
