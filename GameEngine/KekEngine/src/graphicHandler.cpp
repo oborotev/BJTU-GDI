@@ -57,6 +57,11 @@ CameraHandler*      GraphicHandler::getCamera()
     return (this->_mainCamera);
 }
 
+BoxAnimations* GraphicHandler::getBoxAnimationsHandler() const
+{
+    return (this->_boxAnimationsHandler);
+}
+
 void     GraphicHandler::drawBaseMap() const
 {
     this->draw(*this->_baseMap);
@@ -99,6 +104,7 @@ const int     GraphicHandler::init(const bool isPhysics, const sf::Vector2f &gra
         }
     }
     this->_boxAnimationsHandler = new BoxAnimations(this->_clock);
+    this->_boxAnimationsHandler->init();
     this->_window->setView(*this->_mainCamera->getView());
     return (0);
 }
@@ -154,6 +160,7 @@ void    GraphicHandler::terminate()
         this->_physics->terminate();
         delete this->_physics;
     }
+    this->_boxAnimationsHandler->terminate();
     this->_isAlive = false;
 }
 

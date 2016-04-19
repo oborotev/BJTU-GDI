@@ -28,6 +28,8 @@ const int        Underkek::wanderlust()
 const int   Underkek::combat()
 {
     this->_graphicHandler->getPlayer()->setSpeed(2.5);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+        this->_graphicHandler->getBoxAnimationsHandler()->registerNewAnimation(NULL, BoxAnimations::SIZE_CHANGE, sf::IntRect(0,0,0,0), 0, 1.5);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::LEFT);
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))

@@ -60,6 +60,8 @@ public:
     //Physics
     PhysicsHandler     *getPhysicsHandler() const;
     void        moveLivingEntityBody(LivingEntity *entity, const LivingEntity::Direction &direction, b2Body* constraint=NULL, const bool &moveCamera=false, const bool &isPlayer=false);
+    //BoxAnimations
+    BoxAnimations* getBoxAnimationsHandler() const;
     //Drawing
     void        drawPolygonFromFixtures(b2Fixture* fixtures);
     //CLock
