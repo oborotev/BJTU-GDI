@@ -41,7 +41,7 @@ public:
     MediaHandler*   getMediaHandler() const;
     //Events
     const bool  pollEvent();
-    const bool  eventTriggered(const sf::Event::EventType& eventType);
+    const bool  eventTriggered(const sf::Event::EventType& eventType, const sf::Keyboard::Key& code=sf::Keyboard::KeyCount);
     bool        isKeyDown(const sf::Keyboard::Key &key);
     //Camera
     CameraHandler*  getCamera();

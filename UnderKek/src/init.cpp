@@ -63,7 +63,31 @@ const int Underkek::initCombatMode()
     myBodyDef.type = b2_staticBody;
     myBodyDef.position.Set(0, 0);
     myBodyDef.userData = (void *)new sf::Vector2f(1024/2, 500);
+
     this->_physicsHandler->registerNewBody(this->_physicsHandler->getWorld()->CreateBody(&myBodyDef), "combat_box");
+    /*Definition of the boxes properties*/
+    //Combat box walls positions
+    this->_positionCombatBox.push_back(b2Vec2(1024/2, 400));
+    this->_positionCombatBox.push_back(b2Vec2(1024/2, 600));
+    this->_positionCombatBox.push_back(b2Vec2(415, 500));
+    this->_positionCombatBox.push_back(b2Vec2(610, 500));
+    //Combat box walls width and height
+    this->_sizeCombatBox.push_back(b2Vec2(100, 2.5));
+    this->_sizeCombatBox.push_back(b2Vec2(100, 2.5));
+    this->_sizeCombatBox.push_back(b2Vec2(2.5, 102.5));
+    this->_sizeCombatBox.push_back(b2Vec2(2.5, 102.5));
+    //Dialog box Walls positions
+    this->_positionDialogBox.push_back(b2Vec2(510, 400));
+    this->_positionDialogBox.push_back(b2Vec2(510, 600));
+    this->_positionDialogBox.push_back(b2Vec2(120, 500));
+    this->_positionDialogBox.push_back(b2Vec2(904, 500));
+    //Dialog box walls width and height
+    this->_sizeDialogBox.push_back(b2Vec2(390, 2.5));
+    this->_sizeDialogBox.push_back(b2Vec2(390, 2.5));
+    this->_sizeDialogBox.push_back(b2Vec2(2.5, 102.5));
+    this->_sizeDialogBox.push_back(b2Vec2(2.5, 102.5));
+
+    /* Creation of the physic box */
     //shape definition
     b2PolygonShape polygonShape;
     //fixture definition
@@ -71,13 +95,13 @@ const int Underkek::initCombatMode()
     myFixtureDef.shape = &polygonShape;
     myFixtureDef.friction = 0;
     //add four walls to the static body
-    polygonShape.SetAsBox(92, 2.5, b2Vec2(1024/2, 400), 0);//ceiling
+    polygonShape.SetAsBox(this->_sizeDialogBox[0].x, this->_sizeDialogBox[0].y, this->_positionDialogBox[0], 0);//ceiling
     this->_physicsHandler->getBody("combat_box")->CreateFixture(&myFixtureDef);
-    polygonShape.SetAsBox(92, 2.5, b2Vec2(1024/2, 600), 0);//ground
+    polygonShape.SetAsBox(this->_sizeDialogBox[1].x, this->_sizeDialogBox[1].y, this->_positionDialogBox[1], 0);//ground
     this->_physicsHandler->getBody("combat_box")->CreateFixture(&myFixtureDef);
-    polygonShape.SetAsBox(2.5, 102.5, b2Vec2(417, 500), 0);//left wall
+    polygonShape.SetAsBox(this->_sizeDialogBox[2].x, this->_sizeDialogBox[2].y, this->_positionDialogBox[2], 0);//left wall
     this->_physicsHandler->getBody("combat_box")->CreateFixture(&myFixtureDef);
-    polygonShape.SetAsBox(2.5, 102.5, b2Vec2(608, 500), 0);//right wall
+    polygonShape.SetAsBox(this->_sizeDialogBox[3].x, this->_sizeDialogBox[3].y, this->_positionDialogBox[3], 0);//right wall
     this->_physicsHandler->getBody("combat_box")->CreateFixture(&myFixtureDef);
 
     /* Soul */

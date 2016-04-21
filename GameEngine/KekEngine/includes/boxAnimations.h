@@ -19,9 +19,13 @@ public:
     };
     typedef struct s_animationComponents
     {
+        std::string       name;
         b2Fixture         *fixtures;
         BoxAnimations::ANIMATIONS animationType;
-        sf::IntRect newSize;
+        std::vector<b2Vec2> currentSizes;
+        std::vector<b2Vec2> currentPositions;
+        std::vector<b2Vec2> newSizes;
+        std::vector<b2Vec2> newPositions;
         float       newAngle;
         float       speed;
         sf::Time    duration;
@@ -30,9 +34,13 @@ public:
 public:
     BoxAnimations(const sfx::FrameClock *clock);
     void init();
-    void registerNewAnimation(b2Fixture *fixtures, const BoxAnimations::ANIMATIONS &animationType, const sf::IntRect &newSize, const float &newAngle, const float &speed=1.0, const sf::Time &duration=sf::seconds(0));
+    void registerNewAnimation(const std::string &name, b2Fixture *fixtures, const BoxAnimations::ANIMATIONS &animationType,
+                              std::vector<b2Vec2> currentSizes, std::vector<b2Vec2> currentPositions,
+                              std::vector<b2Vec2> &newSizes, std::vector<b2Vec2> &newPositions,
+                              const float &newAngle, const float &speed=1.0, const sf::Time &duration=sf::seconds(0));
     void terminate();
     void animationsHandler();
+    const bool isAnimationRunning(const std::string &name);
     //Animators
     bool sizeChange(std::vector<t_animationComponents>::iterator animation);
 private:

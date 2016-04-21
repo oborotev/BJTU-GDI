@@ -25,11 +25,18 @@ const int        Underkek::wanderlust()
     return (0);
 }
 
+const int   Underkek::pollEvents()
+{
+    if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::E))
+        this->_graphicHandler->getBoxAnimationsHandler()->registerNewAnimation("combat_standard", this->_physicsHandler->getBody("combat_box")->GetFixtureList(), BoxAnimations::SIZE_CHANGE,
+                                                                               this->_sizeDialogBox, this->_positionDialogBox,
+                                                                               this->_sizeCombatBox, this->_positionCombatBox,
+                                                                               this->_physicsHandler->getBody("combat_box")->GetFixtureList()->GetBody()->GetAngle(), 7);
+}
+
 const int   Underkek::combat()
 {
     this->_graphicHandler->getPlayer()->setSpeed(2.5);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-        this->_graphicHandler->getBoxAnimationsHandler()->registerNewAnimation(NULL, BoxAnimations::SIZE_CHANGE, sf::IntRect(0,0,0,0), 0, 1.5);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::LEFT);
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -48,9 +55,11 @@ const int   Underkek::start() {
     this->_graphicHandler->launch();
     while (this->_graphicHandler->getIsAlive())
     {
-        while (this->_graphicHandler->pollEvent())
+        while (this->_graphicHandler->pollEvent()) {
             if (this->_graphicHandler->eventTriggered(sf::Event::Closed))
                 this->_graphicHandler->terminate();
+            this->pollEvents();
+        }
         if (this->_graphicHandler->getIsAlive()) {
             this->_physicsHandler->getWorld()->Step(1/60.f, 8, 3);
             this->_graphicHandler->getPlayer()->getBody()->SetLinearVelocity(b2Vec2(0,0));

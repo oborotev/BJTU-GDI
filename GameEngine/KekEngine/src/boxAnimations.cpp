@@ -18,29 +18,108 @@ void BoxAnimations::init()
     this->_thread->launch();
 }
 
-void BoxAnimations::registerNewAnimation(b2Fixture *fixtures, const BoxAnimations::ANIMATIONS &animationType,
-                                         const sf::IntRect &newSize, const float &newAngle, const float &speed, const sf::Time &duration)
+const bool BoxAnimations::isAnimationRunning(const std::string &name)
+{
+    this->_mutex.lock();
+    for (int i= 0; i < this->_animations.size(); i++)
+    {
+        if (this->_animations[i].name == name)
+        {
+            this->_mutex.unlock();
+            return (true);
+        }
+    }
+    this->_mutex.unlock();
+    return (false);
+}
+void BoxAnimations::registerNewAnimation(const std::string &name, b2Fixture *fixtures, const BoxAnimations::ANIMATIONS &animationType,
+                                         std::vector<b2Vec2> currentSizes, std::vector<b2Vec2> currentPositions,
+                                         std::vector<b2Vec2> &newSizes, std::vector<b2Vec2> &newPositions,
+                                         const float &newAngle, const float &speed, const sf::Time &duration)
 {
     t_animationComponents newComponent;
 
+    newComponent.name = name;
     newComponent.fixtures = fixtures;
     newComponent.animationType = animationType;
-    newComponent.newSize = newSize;
+    newComponent.currentSizes = currentSizes;
+    newComponent.currentPositions = currentPositions;
+    newComponent.newSizes = newSizes;
+    newComponent.newPositions = newPositions;
     newComponent.newAngle = newAngle;
     newComponent.speed = speed;
     newComponent.duration = duration;
     this->_mutex.lock();
-    this->_animations.emplace_back(newComponent);
+    this->_animations.push_back(newComponent);
     this->_mutex.unlock();
-    //this->_threadPool.push_back(new sf::Thread(std::bind(&sizeChanger, this, this->_clock, fixtures, animationType, newSize, this->_threadPool.size(), speed)));
-    //this->_threadPool.back()->launch();
     return ;
 }
 
-bool BoxAnimations::sizeChange(std::vector<t_animationComponents>::iterator animation)
+bool     BoxAnimations::sizeChange(std::vector<t_animationComponents>::iterator animation)
 {
-    std::cout << animation->animationType << std::endl;
-    return (false);
+    bool changed = false;
+    int i = 0;
+    float coef = static_cast<float>((animation->speed * 0.1) * this->_clock->getLastFrameTime().asMilliseconds());
+
+    this->_mutex.lock();
+    for (b2Fixture* f = animation->fixtures; f; f = f->GetNext())
+    {
+        b2PolygonShape* polygonShape = (b2PolygonShape*)f->GetShape();
+        //Sizes
+        if (animation->currentSizes[i].x < animation->newSizes[i].x) {
+            animation->currentSizes[i].x =
+                    animation->currentSizes[i].x + coef > animation->newSizes[i].x ? animation->newSizes[i].x :
+                    animation->currentSizes[i].x + coef;
+            changed = true;
+        }
+        else if (animation->currentSizes[i].x > animation->newSizes[i].x) {
+            animation->currentSizes[i].x =
+                    animation->currentSizes[i].x - coef < animation->newSizes[i].x ? animation->newSizes[i].x :
+                    animation->currentSizes[i].x - coef;
+            changed = true;
+        }
+        if (animation->currentSizes[i].y < animation->newSizes[i].y) {
+            animation->currentSizes[i].y =
+                    animation->currentSizes[i].y + coef > animation->newSizes[i].y ? animation->newSizes[i].y :
+                    animation->currentSizes[i].y + coef;
+            changed = true;
+        }
+        else if (animation->currentSizes[i].y > animation->newSizes[i].y) {
+            animation->currentSizes[i].y =
+                    animation->currentSizes[i].y - coef < animation->newSizes[i].y ? animation->newSizes[i].y :
+                    animation->currentSizes[i].y - coef;
+            changed = true;
+        }
+        //Positions
+        if (animation->currentPositions[i].x < animation->newPositions[i].x) {
+            animation->currentPositions[i].x =
+                    animation->currentPositions[i].x + coef > animation->newPositions[i].x
+                    ? animation->newPositions[i].x : animation->currentPositions[i].x + coef;
+            changed = true;
+        }
+        else if (animation->currentPositions[i].x > animation->newPositions[i].x) {
+            animation->currentPositions[i].x =
+                    animation->currentPositions[i].x - coef < animation->newPositions[i].x
+                    ? animation->newPositions[i].x : animation->currentPositions[i].x - coef;
+            changed = true;
+        }
+        if (animation->currentPositions[i].y < animation->newPositions[i].y) {
+            animation->currentPositions[i].y =
+                    animation->currentPositions[i].y + coef > animation->newPositions[i].y
+                    ? animation->newPositions[i].y : animation->currentPositions[i].y + coef;
+            changed = true;
+        }
+        else if (animation->currentPositions[i].y > animation->newPositions[i].y) {
+            animation->currentPositions[i].y =
+                    animation->currentPositions[i].y - coef < animation->newPositions[i].y
+                    ? animation->newPositions[i].y : animation->currentPositions[i].y - coef;
+            changed = true;
+        }
+        polygonShape->SetAsBox(animation->currentSizes[i].x, animation->currentSizes[i].y, animation->currentPositions[i], animation->newAngle);
+        i++;
+    }
+    this->_mutex.unlock();
+    return (changed);
 }
 
 void BoxAnimations::animationsHandler()
@@ -51,11 +130,11 @@ void BoxAnimations::animationsHandler()
             std::cout << "There is an animation" << std::endl;
             if (this->_animations.size() < 1)
                 break ;
-            if (!(this->*_animators[it->animationType])(it)) {
-                this->_mutex.lock();
+            sf::sleep(sf::milliseconds(20));
+            this->_mutex.lock();
+            if (!(this->*_animators[it->animationType])(it))
                 this->_animations.erase(it);
-                this->_mutex.unlock();
-            }
+            this->_mutex.unlock();
         }
     }
 }

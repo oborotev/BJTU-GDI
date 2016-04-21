@@ -18,6 +18,7 @@ public:
     const int   wanderlust();
     const int   combat();
     const int   initCombatMode();
+    const int   pollEvents();
 private:
     GraphicHandler *_graphicHandler;
     MediaHandler   *_mediaHandler;
@@ -25,6 +26,11 @@ private:
     PhysicsHandler *_physicsHandler;
     std::array<int, 171> _tiledef;
     bool            _combatMode;
+    //Combat boxes definitions
+    std::vector<b2Vec2> _positionDialogBox;
+    std::vector<b2Vec2> _sizeDialogBox;
+    std::vector<b2Vec2> _positionCombatBox;
+    std::vector<b2Vec2> _sizeCombatBox;
 };
 
 #endif //UNDERKEK_UNDERKEK_H

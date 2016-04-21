@@ -176,11 +176,15 @@ const bool      GraphicHandler::pollEvent()
 }
 
 
-const bool      GraphicHandler::eventTriggered(const sf::Event::EventType& eventType)
+const bool      GraphicHandler::eventTriggered(const sf::Event::EventType& eventType, const sf::Keyboard::Key& code)
 {
     if (this->_event.type == sf::Event::KeyReleased && this->_event.key.code == sf::Keyboard::F9)
         this->_fpsDebug = !this->_fpsDebug;
-    if (this->_event.type == eventType)
+    if (code == sf::Keyboard::KeyCount) {
+        if (this->_event.type == eventType)
+            return (true);
+    }
+    else if (this->_event.type == eventType && this->_event.key.code == code)
         return (true);
     return (false);
 }
