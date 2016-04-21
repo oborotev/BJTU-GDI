@@ -13,26 +13,18 @@ BoxAnimations::BoxAnimations(const sfx::FrameClock *clock)
 void BoxAnimations::init()
 {
     this->_animators.insert(std::make_pair(BoxAnimations::ANIMATIONS::SIZE_CHANGE, &BoxAnimations::sizeChange));
-    this->_isAlive = true;
-    this->_thread = new sf::Thread(&BoxAnimations::animationsHandler, this);
-    this->_thread->launch();
 }
 
 const bool BoxAnimations::isAnimationRunning(const std::string &name)
 {
-    this->_mutex.lock();
     for (int i= 0; i < this->_animations.size(); i++)
     {
         if (this->_animations[i].name == name)
-        {
-            this->_mutex.unlock();
             return (true);
-        }
     }
-    this->_mutex.unlock();
     return (false);
 }
-void BoxAnimations::registerNewAnimation(const std::string &name, b2Fixture *fixtures, const BoxAnimations::ANIMATIONS &animationType,
+void BoxAnimations::registerNewAnimation(const std::string &name, b2Body *body, const BoxAnimations::ANIMATIONS &animationType,
                                          std::vector<b2Vec2> currentSizes, std::vector<b2Vec2> currentPositions,
                                          std::vector<b2Vec2> &newSizes, std::vector<b2Vec2> &newPositions,
                                          const float &newAngle, const float &speed, const sf::Time &duration)
@@ -40,7 +32,7 @@ void BoxAnimations::registerNewAnimation(const std::string &name, b2Fixture *fix
     t_animationComponents newComponent;
 
     newComponent.name = name;
-    newComponent.fixtures = fixtures;
+    newComponent.body = body;
     newComponent.animationType = animationType;
     newComponent.currentSizes = currentSizes;
     newComponent.currentPositions = currentPositions;
@@ -49,22 +41,31 @@ void BoxAnimations::registerNewAnimation(const std::string &name, b2Fixture *fix
     newComponent.newAngle = newAngle;
     newComponent.speed = speed;
     newComponent.duration = duration;
-    this->_mutex.lock();
     this->_animations.push_back(newComponent);
-    this->_mutex.unlock();
     return ;
 }
 
 bool     BoxAnimations::sizeChange(std::vector<t_animationComponents>::iterator animation)
 {
     bool changed = false;
-    int i = 0;
     float coef = static_cast<float>((animation->speed * 0.1) * this->_clock->getLastFrameTime().asMilliseconds());
+    std::array<float32, 4> frictions;
+    int i = 0;
 
-    this->_mutex.lock();
-    for (b2Fixture* f = animation->fixtures; f; f = f->GetNext())
+    for (b2Fixture* f = animation->body->GetFixtureList(); f;)
     {
-        b2PolygonShape* polygonShape = (b2PolygonShape*)f->GetShape();
+        b2Fixture* fixtureToDestroy = f;
+        frictions[i] = f->GetFriction();
+        f = f->GetNext();
+        animation->body->DestroyFixture(fixtureToDestroy);
+        i++;
+    }
+    for (i=0; i < 4; i++)
+    {
+        b2PolygonShape polygonShape;
+        b2FixtureDef myFixtureDef;
+        myFixtureDef.shape = &polygonShape;
+        myFixtureDef.friction = frictions[i];
         //Sizes
         if (animation->currentSizes[i].x < animation->newSizes[i].x) {
             animation->currentSizes[i].x =
@@ -115,36 +116,24 @@ bool     BoxAnimations::sizeChange(std::vector<t_animationComponents>::iterator 
                     ? animation->newPositions[i].y : animation->currentPositions[i].y - coef;
             changed = true;
         }
-        polygonShape->SetAsBox(animation->currentSizes[i].x, animation->currentSizes[i].y, animation->currentPositions[i], animation->newAngle);
-        i++;
+        polygonShape.SetAsBox(animation->currentSizes[i].x, animation->currentSizes[i].y, animation->currentPositions[i], animation->newAngle);
+        animation->body->CreateFixture(&myFixtureDef);
     }
-    this->_mutex.unlock();
     return (changed);
 }
 
 void BoxAnimations::animationsHandler()
 {
-    while (this->_isAlive)
-    {
-        for (std::vector<t_animationComponents>::iterator it = this->_animations.begin() ; it != this->_animations.end(); ++it) {
-            std::cout << "There is an animation" << std::endl;
-            if (this->_animations.size() < 1)
-                break ;
-            sf::sleep(sf::milliseconds(20));
-            this->_mutex.lock();
-            if (!(this->*_animators[it->animationType])(it))
-                this->_animations.erase(it);
-            this->_mutex.unlock();
-        }
+    for (std::vector<t_animationComponents>::iterator it = this->_animations.begin() ; it != this->_animations.end(); ++it) {
+        std::cout << "There is an animation" << std::endl;
+        if (this->_animations.size() < 1)
+            break ;
+
+        if (!(this->*_animators[it->animationType])(it))
+            this->_animations.erase(it);
     }
 }
 
 void BoxAnimations::terminate()
 {
-    this->_mutex.lock();
-    this->_isAlive = false;
-    this->_mutex.unlock();
-    this->_thread->wait();
-    this->_thread->terminate();
-    delete this->_thread;
 }

@@ -116,6 +116,7 @@ void     GraphicHandler::loop()
         this->_window->close();
         return;
     }
+    this->_boxAnimationsHandler->animationsHandler();
     if (_fpsDebug)
         this->_window->draw(*this->_clockHUD);
     if (!_playerMoved && _player)

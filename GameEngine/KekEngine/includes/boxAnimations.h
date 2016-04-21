@@ -20,7 +20,7 @@ public:
     typedef struct s_animationComponents
     {
         std::string       name;
-        b2Fixture         *fixtures;
+        b2Body            *body;
         BoxAnimations::ANIMATIONS animationType;
         std::vector<b2Vec2> currentSizes;
         std::vector<b2Vec2> currentPositions;
@@ -34,7 +34,7 @@ public:
 public:
     BoxAnimations(const sfx::FrameClock *clock);
     void init();
-    void registerNewAnimation(const std::string &name, b2Fixture *fixtures, const BoxAnimations::ANIMATIONS &animationType,
+    void registerNewAnimation(const std::string &name, b2Body *body, const BoxAnimations::ANIMATIONS &animationType,
                               std::vector<b2Vec2> currentSizes, std::vector<b2Vec2> currentPositions,
                               std::vector<b2Vec2> &newSizes, std::vector<b2Vec2> &newPositions,
                               const float &newAngle, const float &speed=1.0, const sf::Time &duration=sf::seconds(0));
