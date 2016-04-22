@@ -45,7 +45,7 @@ const int   Underkek::init()
     this->_mediaHandler->addNewFont("../media/fonts/MonsterFriendFore.otf", "MonsterFriendFore");
     this->_mediaHandler->addNewFont("../media/fonts/Mars_Needs_Cunnilingus.ttf", "ROFLMAO");
     this->_mediaHandler->addNewTexture("../media/textures/tileset.gif", "map_tileset");
-    this->_mediaHandler->addNewTexture("../media/textures/heart.jpe", "soul_heart");
+    this->_mediaHandler->addNewTexture("../media/textures/heart.png", "soul_heart");
     this->_mediaHandler->addNewSprite(this->_mediaHandler->getTexture("soul_heart"), "player_soul");
     this->_mediaHandler->addNewSound("../media/sounds/tic.wav", "tic_dialog");
     this->playerInit();
