@@ -47,6 +47,7 @@ const int   Underkek::init()
     this->_mediaHandler->addNewTexture("../media/textures/tileset.gif", "map_tileset");
     this->_mediaHandler->addNewTexture("../media/textures/heart.jpe", "soul_heart");
     this->_mediaHandler->addNewSprite(this->_mediaHandler->getTexture("soul_heart"), "player_soul");
+    this->_mediaHandler->addNewSound("../media/sounds/tic.wav", "tic_dialog");
     this->playerInit();
     this->_tilesetHandler->init(this->_mediaHandler->getTexture("map_tileset"), sf::Vector2u(32, 32), "../media/maps/base", 0, 0, _tiledef.data());
     if (this->_graphicHandler->init()) {

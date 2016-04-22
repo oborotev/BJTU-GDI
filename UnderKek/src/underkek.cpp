@@ -28,6 +28,7 @@ const int        Underkek::wanderlust()
 const int   Underkek::pollEvents()
 {
     if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::E)) {
+        this->_mediaHandler->getSound("tic_dialog")->play();
         this->_graphicHandler->getBoxAnimationsHandler()->registerNewAnimation("combat_standard", this->_physicsHandler->getBody("combat_box"), BoxAnimations::SIZE_CHANGE,
                                                                                this->_sizeDialogBox, this->_positionDialogBox,
                                                                                this->_sizeCombatBox, this->_positionCombatBox,

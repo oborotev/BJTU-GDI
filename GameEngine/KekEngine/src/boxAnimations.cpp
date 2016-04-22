@@ -125,7 +125,7 @@ bool     BoxAnimations::sizeChange(std::vector<t_animationComponents>::iterator 
 void BoxAnimations::animationsHandler()
 {
     for (std::vector<t_animationComponents>::iterator it = this->_animations.begin() ; it != this->_animations.end(); ++it) {
-        std::cout << "There is an animation" << std::endl;
+        //std::cout << "There is an animation" << std::endl;
         if (this->_animations.size() < 1)
             break ;
 

@@ -17,8 +17,25 @@ void        MediaHandler::wipeAll()
     this->_sprites.clear();
     for (std::vector<std::pair<sf::Shape *, const std::string>>::iterator it = this->_shapes.begin(); it != this->_shapes.end(); ++it)
         delete it->first;
+    for (std::vector<std::pair<sf::Sound *, const std::string>>::iterator it = this->_sounds.begin(); it != this->_sounds.end(); ++it)
+        delete it->first;
     this->_shapes.clear();
     this->_staticElems.clear();
+}
+
+const int   MediaHandler::addNewSound(const std::string &path, const std::string &name)
+{
+    sf::SoundBuffer buffer;
+
+    if (!buffer.loadFromFile(path))
+    {
+        std::cout << "Problem while loading the sound" << std::endl;
+        return (1);
+    }
+    this->_sounds.emplace_back(std::make_pair(new sf::Sound, name));
+    this->_sounds.back().first->setBuffer(buffer);
+    this->_sounds.back().first->play();
+    return (0);
 }
 
 const int   MediaHandler::addNewTexture(const std::string &path, const std::string &name)
@@ -121,6 +138,20 @@ sf::Font* MediaHandler::getFont(const std::string &name)
     else
     {
         std::cout << "Couldn't find a font for " << name << " in the registered fonts" << std::endl;
+        return (NULL);
+    }
+}
+
+sf::Sound* MediaHandler::getSound(const std::string &name)
+{
+    if (this->_sounds.size() == 0)
+        return (NULL);
+    auto it = std::find_if(this->_sounds.begin(), this->_sounds.end(), [&name](const std::pair<sf::Sound *, const std::string>& obj) {return obj.second == name;});
+    if (it != this->_sounds.end())
+        return (it->first);
+    else
+    {
+        std::cout << "Couldn't find a sound for " << name << " in the registered sounds" << std::endl;
         return (NULL);
     }
 }
