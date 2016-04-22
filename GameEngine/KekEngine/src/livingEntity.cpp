@@ -8,6 +8,7 @@
 LivingEntity::LivingEntity(const int &x, const int &y, const int &hp, const float &speed, const bool animated, const sf::Time &animationSpeed, sf::Texture *spriteSheet) : Entity(x, y)
 {
     this->_hp = hp;
+    this->_currentHp = hp;
     this->_animated = animated;
     this->_animationSpeed = animationSpeed;
     this->_speed = speed;

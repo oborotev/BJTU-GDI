@@ -35,6 +35,24 @@ const int   Underkek::pollEvents()
     }
 }
 
+const int   Underkek::hudCombat()
+{
+    //Player GUI elems
+    this->_graphicHandler->draw(this->_namePlayer);
+    this->_graphicHandler->draw(this->_levelPlayer);
+    this->_graphicHandler->draw(this->_hpText);
+    this->_graphicHandler->draw(this->_redBar);
+    this->_graphicHandler->draw(this->_yellowBar);
+    this->_graphicHandler->draw(this->_hpNumbers);
+
+    //Buttons elems
+    this->_graphicHandler->draw(*this->_mediaHandler->getSprite("fight_button_unselected"));
+    this->_graphicHandler->draw(*this->_mediaHandler->getSprite("act_button_unselected"));
+    this->_graphicHandler->draw(*this->_mediaHandler->getSprite("item_button_unselected"));
+    this->_graphicHandler->draw(*this->_mediaHandler->getSprite("mercy_button_unselected"));
+    return (0);
+}
+
 const int   Underkek::combat()
 {
     this->_graphicHandler->getPlayer()->setSpeed(2.5);
@@ -47,6 +65,10 @@ const int   Underkek::combat()
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::DOWN);
     this->_graphicHandler->drawPolygonFromFixtures(this->_physicsHandler->getBody("combat_box")->GetFixtureList());
+
+    //Hud combat
+    this->hudCombat();
+
     this->_graphicHandler->getPlayer()->updateBody();
     this->_graphicHandler->draw(*this->_graphicHandler->getPlayer()->getBodySprite());
     return (0);

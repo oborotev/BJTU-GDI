@@ -17,6 +17,7 @@ public:
     const int   playerInit();
     const int   wanderlust();
     const int   combat();
+    const int   hudCombat();
     const int   initCombatMode();
     const int   pollEvents();
 private:
@@ -26,11 +27,24 @@ private:
     PhysicsHandler *_physicsHandler;
     std::array<int, 171> _tiledef;
     bool            _combatMode;
+
     //Combat boxes definitions
     std::vector<b2Vec2> _positionDialogBox;
     std::vector<b2Vec2> _sizeDialogBox;
     std::vector<b2Vec2> _positionCombatBox;
     std::vector<b2Vec2> _sizeCombatBox;
+
+    //Player infos
+    std::string     _playerName;
+    std::string     _playerLevel;
+
+    //Player GUI Elems
+    sf::Text        _namePlayer;
+    sf::Text        _levelPlayer;
+    sf::Text        _hpText;
+    sf::Text        _hpNumbers;
+    sf::RectangleShape _redBar;
+    sf::RectangleShape _yellowBar;
 };
 
 #endif //UNDERKEK_UNDERKEK_H

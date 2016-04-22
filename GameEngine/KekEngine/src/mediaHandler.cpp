@@ -65,10 +65,12 @@ std::vector<std::pair<sf::Transformable *, MediaHandler::t_staticParameters>>   
     return (this->_staticElems);
 }
 
-const int   MediaHandler::addNewSprite(sf::Texture *texture, const std::string &spriteName, const bool isGui, const sf::Vector2i &position)
+const int   MediaHandler::addNewSprite(sf::Texture *texture, const std::string &spriteName,  const sf::IntRect &textureRect, const bool isGui, const sf::Vector2i &position)
 {
     this->_sprites.emplace_back(std::make_pair(new sf::Sprite, spriteName));
     this->_sprites.back().first->setTexture(*texture);
+    if (textureRect.height != 0 && textureRect.width != 0)
+        this->_sprites.back().first->setTextureRect(textureRect);
     if (isGui)
     {
         MediaHandler::t_staticParameters staticParams;

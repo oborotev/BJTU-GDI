@@ -43,6 +43,7 @@ public:
     void            moveBody(const sf::Vector2f &vector, b2Body* constraint);
 protected:
     int _hp;
+    int _currentHp;
     bool _animated;
     float _speed;
     sf::Time _animationSpeed;
