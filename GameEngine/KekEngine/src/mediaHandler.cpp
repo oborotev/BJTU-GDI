@@ -19,22 +19,22 @@ void        MediaHandler::wipeAll()
         delete it->first;
     for (std::vector<std::pair<sf::Sound *, const std::string>>::iterator it = this->_sounds.begin(); it != this->_sounds.end(); ++it)
         delete it->first;
+    for (std::vector<std::pair<sf::SoundBuffer *, const std::string>>::iterator it = this->_soundBuffers.begin(); it != this->_soundBuffers.end(); ++it)
+        delete it->first;
     this->_shapes.clear();
     this->_staticElems.clear();
 }
 
 const int   MediaHandler::addNewSound(const std::string &path, const std::string &name)
 {
-    sf::SoundBuffer buffer;
-
-    if (!buffer.loadFromFile(path))
+    this->_soundBuffers.emplace_back(std::make_pair(new sf::SoundBuffer, name));
+    if (!this->_soundBuffers.back().first->loadFromFile(path))
     {
         std::cout << "Problem while loading the sound" << std::endl;
         return (1);
     }
     this->_sounds.emplace_back(std::make_pair(new sf::Sound, name));
-    this->_sounds.back().first->setBuffer(buffer);
-    this->_sounds.back().first->play();
+    this->_sounds.back().first->setBuffer(*this->_soundBuffers.back().first);
     return (0);
 }
 

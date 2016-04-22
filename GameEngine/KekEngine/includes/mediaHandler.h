@@ -42,6 +42,7 @@ private:
     std::vector<std::pair<sf::Sprite *, const std::string>>   _sprites;
     std::vector<std::pair<sf::Shape *, const std::string>>    _shapes;
     std::vector<std::pair<sf::Sound *, const std::string>>    _sounds;
+    std::vector<std::pair<sf::SoundBuffer *, const std::string>> _soundBuffers;
     std::vector<std::pair<sf::Transformable *, MediaHandler::t_staticParameters>> _staticElems;
 };
 
