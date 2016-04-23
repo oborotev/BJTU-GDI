@@ -110,8 +110,8 @@ const int Underkek::initCombatMode()
 
     //Act selected
     this->_mediaHandler->addNewSprite(this->_mediaHandler->getTexture("buttons_combat"), "act_button_selected", sf::IntRect(115, 47, 114, 46));
-    this->_mediaHandler->getSprite("act_button_unselected")->setPosition(335, 660);
-    this->_mediaHandler->getSprite("act_button_unselected")->setScale(1.25, 1.25);
+    this->_mediaHandler->getSprite("act_button_selected")->setPosition(335, 660);
+    this->_mediaHandler->getSprite("act_button_selected")->setScale(1.25, 1.25);
 
     //Item unselected
     this->_mediaHandler->addNewSprite(this->_mediaHandler->getTexture("buttons_combat"), "item_button_unselected", sf::IntRect(230, 0, 114, 46));
@@ -119,11 +119,11 @@ const int Underkek::initCombatMode()
     this->_mediaHandler->getSprite("item_button_unselected")->setScale(1.25, 1.25);
 
     //Item selected
-    this->_mediaHandler->addNewSprite(this->_mediaHandler->getTexture("buttons_combat"), "item_button_unselected", sf::IntRect(230, 47, 114, 46));
-    this->_mediaHandler->getSprite("item_button_unselected")->setPosition(550, 660);
-    this->_mediaHandler->getSprite("item_button_unselected")->setScale(1.25, 1.25);
+    this->_mediaHandler->addNewSprite(this->_mediaHandler->getTexture("buttons_combat"), "item_button_selected", sf::IntRect(230, 47, 114, 46));
+    this->_mediaHandler->getSprite("item_button_selected")->setPosition(550, 660);
+    this->_mediaHandler->getSprite("item_button_selected")->setScale(1.25, 1.25);
 
-    //Mercy selected
+    //Mercy unselected
     this->_mediaHandler->addNewSprite(this->_mediaHandler->getTexture("buttons_combat"), "mercy_button_unselected", sf::IntRect(345, 0, 114, 46));
     this->_mediaHandler->getSprite("mercy_button_unselected")->setPosition(765, 660);
     this->_mediaHandler->getSprite("mercy_button_unselected")->setScale(1.25, 1.25);
@@ -211,4 +211,8 @@ const int Underkek::initCombatMode()
 
     //For dialog box
     this->_stateDialogBox = 3;
+
+    //Player combat states
+    this->_inCombat = false;
+    this->_inSelection = 1;
 }

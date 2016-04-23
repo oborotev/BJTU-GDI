@@ -20,6 +20,8 @@ public:
     const int   hudCombat();
     const int   initCombatMode();
     const int   pollEvents();
+    const int   inCombatMovements();
+    const int   inHudCombatMovements();
 private:
     GraphicHandler *_graphicHandler;
     MediaHandler   *_mediaHandler;
@@ -50,6 +52,10 @@ private:
     sf::Text        _dialogBox;
     sf::Time        _delayText;
     int             _stateDialogBox;
+
+    //Player combat state
+    bool            _inCombat;
+    int             _inSelection;
 
     //test
     std::vector<std::string> _empty;
