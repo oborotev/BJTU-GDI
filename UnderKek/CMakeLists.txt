@@ -25,11 +25,12 @@ add_executable(UnderKek ${KEKENGINE_SRC} ${COLLISIONS_SRC} ${ANIMATIONS_SRC}  ${
 #target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
 
 # SFML libraries
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-audio.so.2.3.2)
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-graphics.so.2.3.2)
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-network.so.2.3.2)
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-system.so.2.3.2)
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-window.so.2.3.2)
+link_directories(CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/)
+target_link_libraries(${EXECUTABLE_NAME} sfml-window)
+target_link_libraries(${EXECUTABLE_NAME} sfml-audio)
+target_link_libraries(${EXECUTABLE_NAME} sfml-graphics)
+target_link_libraries(${EXECUTABLE_NAME} sfml-system)
+target_link_libraries(${EXECUTABLE_NAME} sfml-network)
 
 #BOX2D
 #find_package(Box2D)
