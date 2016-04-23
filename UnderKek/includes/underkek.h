@@ -45,6 +45,12 @@ private:
     sf::Text        _hpNumbers;
     sf::RectangleShape _redBar;
     sf::RectangleShape _yellowBar;
+
+    //Dialog Box
+    sf::Text        _dialogBox;
+
+    //test
+    std::vector<std::string> _empty;
 };
 
 #endif //UNDERKEK_UNDERKEK_H

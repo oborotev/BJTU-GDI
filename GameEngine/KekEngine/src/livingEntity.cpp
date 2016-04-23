@@ -12,6 +12,7 @@ LivingEntity::LivingEntity(const int &x, const int &y, const int &hp, const floa
     this->_animated = animated;
     this->_animationSpeed = animationSpeed;
     this->_speed = speed;
+    this->_active = true;
     if (spriteSheet)
     {
         for (int i = 0; i < this->_animations.size(); i++) {
@@ -127,4 +128,15 @@ void        LivingEntity::moveBody(const sf::Vector2f &vector, b2Body* constrain
         this->_body.first->SetLinearVelocity(b2Vec2(vector.x * 30, this->_body.first->GetLinearVelocity().y));
     else
         this->_body.first->SetLinearVelocity(b2Vec2(this->_body.first->GetLinearVelocity().x, vector.y * 30));
+}
+
+const bool  LivingEntity::getActive() const
+{
+    return (this->_active);
+}
+
+void        LivingEntity::setActive(const bool active)
+{
+    this->_active = active;
+    this->_body.first->SetActive(active);
 }

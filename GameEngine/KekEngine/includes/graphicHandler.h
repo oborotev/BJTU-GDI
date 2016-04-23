@@ -17,6 +17,7 @@
 # include "player.h"
 # include "physics.h"
 # include "boxAnimations.h"
+# include "speechSound.h"
 
 class GraphicHandler
 {
@@ -62,6 +63,8 @@ public:
     void        moveLivingEntityBody(LivingEntity *entity, const LivingEntity::Direction &direction, b2Body* constraint=NULL, const bool &moveCamera=false, const bool &isPlayer=false);
     //BoxAnimations
     BoxAnimations* getBoxAnimationsHandler() const;
+    //SpeechSound
+    SpeechSound*    getSpeechSoundHandler() const;
     //Drawing
     void        drawPolygonFromFixtures(b2Fixture* fixtures);
     //CLock
@@ -109,6 +112,8 @@ private:
     PhysicsHandler*  _physics;
     //BoxAnimations
     BoxAnimations*   _boxAnimationsHandler;
+    //Speech Sound
+    SpeechSound*     _speechSoundHandler;
     //Fonts
     std::string      _mainFontPath;
     sf::Font         _mainFont;

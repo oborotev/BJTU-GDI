@@ -81,6 +81,7 @@ const int   Underkek::init()
     this->_hpNumbers.setString("20 / 20");
     this->_hpNumbers.setCharacterSize(27);
     this->_hpNumbers.setPosition(530, 610);
+    this->_empty.push_back("* There is nothing to see here");
     this->initCombatMode();
     return (0);
 }
@@ -138,6 +139,12 @@ const int Underkek::initCombatMode()
     this->_yellowBar.setSize(sf::Vector2f(40, 30));
     this->_yellowBar.setPosition(465,615);
     this->_yellowBar.setFillColor(sf::Color::Yellow);
+
+    //Dialog Box
+    this->_dialogBox.setFont(*this->_mediaHandler->getFont("DTM-Sans"));
+    this->_dialogBox.setColor(sf::Color::White);
+    this->_dialogBox.setPosition(150, 425);
+    this->_dialogBox.setCharacterSize(40);
 
     /* Combat Box */
     b2BodyDef myBodyDef;
@@ -198,5 +205,6 @@ const int Underkek::initCombatMode()
     soulFixtureDef.shape = &boxShape;
     this->_physicsHandler->getBody("player_soul")->CreateFixture(&soulFixtureDef);
     this->_graphicHandler->getPlayer()->setPhysicBody(this->_physicsHandler->getBody("player_soul"), this->_mediaHandler->getSprite("player_soul"));
+    this->_graphicHandler->getPlayer()->setActive(false);
     this->_graphicHandler->getPlayer()->setXYstandalone(500, 475);
 }

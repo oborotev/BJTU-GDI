@@ -36,6 +36,7 @@ GraphicHandler::~GraphicHandler() {
     delete this->_clock;
     delete this->_clockHUD;
     delete this->_mainCamera;
+    delete this->_speechSoundHandler;
     if (this->_boxAnimationsHandler)
         delete this->_boxAnimationsHandler;
     if (this->_player)
@@ -105,6 +106,7 @@ const int     GraphicHandler::init(const bool isPhysics, const sf::Vector2f &gra
     }
     this->_boxAnimationsHandler = new BoxAnimations(this->_clock);
     this->_boxAnimationsHandler->init();
+    this->_speechSoundHandler = new SpeechSound(this->_clock);
     this->_window->setView(*this->_mainCamera->getView());
     return (0);
 }
@@ -213,4 +215,9 @@ Player* GraphicHandler::getPlayer() const
 PhysicsHandler* GraphicHandler::getPhysicsHandler() const
 {
     return (this->_physics);
+}
+
+SpeechSound*    GraphicHandler::getSpeechSoundHandler() const
+{
+    return (this->_speechSoundHandler);
 }

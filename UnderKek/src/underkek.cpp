@@ -67,11 +67,18 @@ const int   Underkek::combat()
         this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::DOWN);
     this->_graphicHandler->drawPolygonFromFixtures(this->_physicsHandler->getBody("combat_box")->GetFixtureList());
 
+    this->_graphicHandler->getSpeechSoundHandler()->textToSpeech(this->_empty, this->_dialogBox, this->_mediaHandler->getSound("tic_dialog"));
+
+    this->_graphicHandler->draw(this->_dialogBox);
+
     //Hud combat
     this->hudCombat();
 
-    this->_graphicHandler->getPlayer()->updateBody();
-    this->_graphicHandler->draw(*this->_graphicHandler->getPlayer()->getBodySprite());
+    if (this->_graphicHandler->getPlayer()->getActive())
+    {
+        this->_graphicHandler->getPlayer()->updateBody();
+        this->_graphicHandler->draw(*this->_graphicHandler->getPlayer()->getBodySprite());
+    }
     return (0);
 }
 
