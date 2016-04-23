@@ -4,12 +4,14 @@ project(UnderKek)
 # Set executable name
 set(EXECUTABLE_NAME UnderKek)
 
-#set(CMAKE_INSTALL_RPATH "$ORIGIN")
+set(CMAKE_INSTALL_RPATH "$ORIGIN")
 
 #Libraries path
 #set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML)
 
 set(CMAKE_INSTALL_RPATH "${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML")
+SET(CMAKE_EXE_LINKER_FLAGS
+        "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath -Wl,$ORIGIN")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -23,7 +25,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../GameEngine/KekEngine.cmake)
 set(dir ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${dir}/bin")
 
-link_directories(./libs/SFML)
+link_directories(libs/SFML)
 
 set(SOURCE_FILES src/main.cpp src/underkek.cpp src/init.cpp src/combat.cpp src/combatMenus.cpp)
 add_executable(UnderKek ${KEKENGINE_SRC} ${COLLISIONS_SRC} ${ANIMATIONS_SRC}  ${SOURCE_FILES})
