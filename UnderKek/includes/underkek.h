@@ -48,6 +48,7 @@ private:
 
     //Dialog Box
     sf::Text        _dialogBox;
+    sf::Time        _delayText;
 
     //test
     std::vector<std::string> _empty;

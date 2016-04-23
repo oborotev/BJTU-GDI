@@ -9,6 +9,8 @@ SpeechSound::SpeechSound(const sfx::FrameClock *clock)
 {
     this->_clock = clock;
     this->_begin = false;
+    this->_punctuationSymbolsHalfTime = ",;";
+    this->_punctuationSymbols = "?!.";
 }
 
 void SpeechSound::clearText()
@@ -23,20 +25,26 @@ const int SpeechSound::textToSpeech(std::vector<std::string> &dialogs, sf::Text 
         this->_currentTime = delay;
         this->_temp = this->_currentDialog->c_str()[0];
         this->_begin = true;
+        this->_punctuation = sf::seconds(1);
     }
-    if (_currentDialog == dialogs.end())
+    if (this->_currentDialog == dialogs.end())
         return (0);
     while (this->_currentDialog->compare(this->_temp))
     {
-        if (_currentTime < delay)
-            _currentTime += this->_clock->getLastFrameTime();
+        if (_currentTime < delay || _punctuation < sf::seconds(1)) {
+            this->_currentTime += this->_clock->getLastFrameTime();
+            this->_punctuation += this->_clock->getLastFrameTime();
+        }
         else
         {
-            int i = 0;
             this->_temp += this->_currentDialog->c_str()[this->_temp.size()];
-            while (this->_currentDialog->c_str()[this->_temp.size() + i] == ' ') {
-                this->_temp += this->_currentDialog->c_str()[this->_temp.size() + i];
-                i++;
+            if (this->_punctuationSymbols.find(this->_temp.back()) != std::string::npos)
+                this->_punctuation = sf::seconds(0);
+            else if (this->_punctuationSymbolsHalfTime.find(this->_temp.back()) != std::string::npos)
+                this->_punctuation = sf::seconds(0.5);
+            while (this->_currentDialog->c_str()[this->_temp.size()] == ' ' ||
+                    this->_currentDialog->c_str()[this->_temp.size()] == '\n') {
+                this->_temp += this->_currentDialog->c_str()[this->_temp.size()];
             }
             textObject.setString(this->_temp);
             sound->play();

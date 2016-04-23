@@ -22,6 +22,9 @@ private:
     std::vector<std::string>::iterator _currentDialog;
     std::vector<std::string> _dialogs;
     bool _begin;
+    sf::Time _punctuation;
+    std::string _punctuationSymbols;
+    std::string _punctuationSymbolsHalfTime;
 };
 
 #endif //GAMEENGINE_SPEECHSOUND_H_H
