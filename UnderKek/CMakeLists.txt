@@ -4,14 +4,16 @@ project(UnderKek)
 # Set executable name
 set(EXECUTABLE_NAME UnderKek)
 
-set(CMAKE_INSTALL_RPATH "$ORIGIN")
+set(CMAKE_INSTALL_RPATH "$ORIGIN/../libs/SFML")
+
+set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 
 #Libraries path
 #set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML)
 
-set(CMAKE_INSTALL_RPATH "${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML")
-SET(CMAKE_EXE_LINKER_FLAGS
-        "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath -Wl,$ORIGIN")
+#set(CMAKE_INSTALL_RPATH "${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML")
+#SET(CMAKE_EXE_LINKER_FLAGS
+#        "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath -Wl,$ORIGIN")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -39,10 +41,6 @@ add_executable(UnderKek ${KEKENGINE_SRC} ${COLLISIONS_SRC} ${ANIMATIONS_SRC}  ${
 find_library(SFMLLIBS
         NAMES Box2D sfml-window sfml-network sfml-audio sfml-graphics sfml-system
         PATHS ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML)
-MESSAGE("CACA")
-MESSAGE(${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML)
-MESSAGE(STATUS ${SFMLLIBS})
-MESSAGE("END")
 #target_link_libraries(${EXECUTABLE_NAME} ${SFMLLIBS})
 target_link_libraries(${EXECUTABLE_NAME} sfml-window)
 target_link_libraries(${EXECUTABLE_NAME} sfml-audio)
