@@ -18,7 +18,7 @@ void SpeechSound::clearText()
     this->_begin = false;
 }
 
-const int SpeechSound::textToSpeech(std::vector<std::string> &dialogs, sf::Text &textObject, sf::Sound *sound, const sf::Time &delay, const bool fastForward)
+const int SpeechSound::textToSpeech(std::vector<std::string> &dialogs, sf::Text &textObject, sf::Sound *sound, const bool fastForward, const sf::Time &delay)
 {
     if (!_begin) {
         this->_currentDialog = dialogs.begin();
@@ -29,6 +29,13 @@ const int SpeechSound::textToSpeech(std::vector<std::string> &dialogs, sf::Text 
     }
     if (this->_currentDialog == dialogs.end())
         return (0);
+    if (fastForward)
+    {
+        this->_temp = this->_currentDialog->c_str();
+        textObject.setString(this->_temp);
+        sound->play();
+        return (1);
+    }
     while (this->_currentDialog->compare(this->_temp))
     {
         if (_currentTime < delay || _punctuation < sf::seconds(1)) {
@@ -53,5 +60,10 @@ const int SpeechSound::textToSpeech(std::vector<std::string> &dialogs, sf::Text 
         return (2);
     }
     _currentDialog++;
+    if (this->_currentDialog == dialogs.end())
+        return (0);
+    this->_temp = "";
+    this->_punctuation = sf::seconds(1);
+    this->_currentTime = delay;
     return (1);
 }

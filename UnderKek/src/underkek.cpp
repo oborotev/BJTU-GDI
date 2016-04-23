@@ -27,12 +27,32 @@ const int        Underkek::wanderlust()
 
 const int   Underkek::pollEvents()
 {
-    if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::E)) {
-        this->_mediaHandler->getSound("tic_dialog")->play();
-        this->_graphicHandler->getBoxAnimationsHandler()->registerNewAnimation("combat_standard", this->_physicsHandler->getBody("combat_box"), BoxAnimations::SIZE_CHANGE,
-                                                                               this->_sizeDialogBox, this->_positionDialogBox,
-                                                                               this->_sizeCombatBox, this->_positionCombatBox,
-                                                                               this->_physicsHandler->getBody("combat_box")->GetFixtureList()->GetBody()->GetAngle(), 7);
+    if (this->_combatMode)
+    {
+        if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::E)) {
+            this->_mediaHandler->getSound("tic_dialog")->play();
+            this->_graphicHandler->getBoxAnimationsHandler()->registerNewAnimation("combat_standard", this->_physicsHandler->getBody("combat_box"), BoxAnimations::SIZE_CHANGE,
+                                                                                   this->_sizeDialogBox, this->_positionDialogBox,
+                                                                                   this->_sizeCombatBox, this->_positionCombatBox,
+                                                                                   this->_physicsHandler->getBody("combat_box")->GetFixtureList()->GetBody()->GetAngle(), 7);
+        }
+        if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::Return))
+        {
+            if (this->_stateDialogBox == 2) {
+                this->_stateDialogBox = this->_graphicHandler->getSpeechSoundHandler()->textToSpeech(this->_empty,
+                                                                                                     this->_dialogBox,
+                                                                                                     this->_mediaHandler->getSound(
+                                                                                                             "tic_dialog"), true);
+                this->_stateDialogBox = 3;
+            }
+            else if (this->_stateDialogBox == 1)
+                this->_stateDialogBox = 3;
+            else if (this->_stateDialogBox == 0)
+            {
+                this->_graphicHandler->getSpeechSoundHandler()->clearText();
+                this->_stateDialogBox = 3;
+            }
+        }
     }
 }
 
@@ -67,7 +87,8 @@ const int   Underkek::combat()
         this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::DOWN);
     this->_graphicHandler->drawPolygonFromFixtures(this->_physicsHandler->getBody("combat_box")->GetFixtureList());
 
-    this->_graphicHandler->getSpeechSoundHandler()->textToSpeech(this->_empty, this->_dialogBox, this->_mediaHandler->getSound("tic_dialog"));
+    if (this->_stateDialogBox == 3 || this->_stateDialogBox == 2)
+        this->_stateDialogBox = this->_graphicHandler->getSpeechSoundHandler()->textToSpeech(this->_empty, this->_dialogBox, this->_mediaHandler->getSound("tic_dialog"));
 
     this->_graphicHandler->draw(this->_dialogBox);
 
@@ -94,8 +115,10 @@ const int   Underkek::start() {
         if (this->_graphicHandler->getIsAlive()) {
             this->_physicsHandler->getWorld()->Step(1/60.f, 8, 3);
             this->_graphicHandler->getPlayer()->getBody()->SetLinearVelocity(b2Vec2(0,0));
-            if (!this->_combatMode)
-                this->combat();//this->wanderlust();
+            if (this->_combatMode)
+                this->combat();
+            else
+                this->wanderlust();
             this->_graphicHandler->loop();
         }
     }

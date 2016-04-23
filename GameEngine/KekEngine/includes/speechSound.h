@@ -13,7 +13,7 @@ class SpeechSound
 {
 public:
     SpeechSound(const sfx::FrameClock *clock);
-    const int textToSpeech(std::vector<std::string> &dialogs, sf::Text &textObject, sf::Sound *sound, const sf::Time &delay=sf::seconds(0.05), const bool fastForward=false);
+    const int textToSpeech(std::vector<std::string> &dialogs, sf::Text &textObject, sf::Sound *sound, const bool fastForward=false, const sf::Time &delay=sf::seconds(0.05));
     void clearText();
 private:
     const sfx::FrameClock *_clock;

@@ -34,7 +34,7 @@ const int   Underkek::playerInit()
 
 const int   Underkek::init()
 {
-    this->_combatMode = false;
+    this->_combatMode = true;
     _tiledef.fill(TilesetHandler::WALL);
     _tiledef[9] = TilesetHandler::FREE;
     this->_graphicHandler = new GraphicHandler("Underkek", "../media/fonts/DTM-Mono.otf");
@@ -81,7 +81,8 @@ const int   Underkek::init()
     this->_hpNumbers.setString("20 / 20");
     this->_hpNumbers.setCharacterSize(27);
     this->_hpNumbers.setPosition(530, 610);
-    this->_empty.push_back("* There is nothing to see here.\nNor there lol. But this is funny, not\nto say the least.");
+    this->_empty.push_back("* This is a beatiful sentence my\nfriend. But There is nothing to see\n here.");
+    this->_empty.push_back("* But this is another text my\nlittle friend ;)");
     this->initCombatMode();
     return (0);
 }
@@ -207,4 +208,7 @@ const int Underkek::initCombatMode()
     this->_graphicHandler->getPlayer()->setPhysicBody(this->_physicsHandler->getBody("player_soul"), this->_mediaHandler->getSprite("player_soul"));
     this->_graphicHandler->getPlayer()->setActive(false);
     this->_graphicHandler->getPlayer()->setXYstandalone(500, 475);
+
+    //For dialog box
+    this->_stateDialogBox = 3;
 }
