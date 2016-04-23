@@ -81,7 +81,7 @@ const int   Underkek::init()
     this->_hpNumbers.setString("20 / 20");
     this->_hpNumbers.setCharacterSize(27);
     this->_hpNumbers.setPosition(530, 610);
-    this->_empty.push_back("* There is nothing to see here");
+    this->_empty.push_back("* There is nothing to see here.");
     this->initCombatMode();
     return (0);
 }

@@ -11,6 +11,11 @@ SpeechSound::SpeechSound(const sfx::FrameClock *clock)
     this->_begin = false;
 }
 
+void SpeechSound::clearText()
+{
+    this->_begin = false;
+}
+
 const int SpeechSound::textToSpeech(std::vector<std::string> &dialogs, sf::Text &textObject, sf::Sound *sound, const sf::Time &delay, const bool fastForward)
 {
     if (!_begin) {
