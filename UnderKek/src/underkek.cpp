@@ -27,6 +27,8 @@ const int        Underkek::wanderlust()
 
 const int   Underkek::pollEvents()
 {
+    if (this->_inSelection > 1)
+        this->inHudCombatMovements();
     if (this->_combatMode)
     {
         if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::E)) {
@@ -36,7 +38,7 @@ const int   Underkek::pollEvents()
                                                                                    this->_sizeCombatBox, this->_positionCombatBox,
                                                                                    this->_physicsHandler->getBody("combat_box")->GetFixtureList()->GetBody()->GetAngle(), 7);
         }
-        if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::Return))
+        if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::Return) && this->_inSelection == 1)
         {
             if (this->_stateDialogBox == 2) {
                 this->_stateDialogBox = this->_graphicHandler->getSpeechSoundHandler()->textToSpeech(this->_empty,
@@ -46,16 +48,14 @@ const int   Underkek::pollEvents()
                 this->_stateDialogBox = 3;
             }
             else if (this->_stateDialogBox == 1)
-                this->_stateDialogBox = 3;
-            else if (this->_stateDialogBox == 0 && this->_inSelection != 2)
+                this->_stateDialogBox = 2;
+            else if (this->_stateDialogBox == 0)
             {
                 this->_graphicHandler->getSpeechSoundHandler()->clearText();
                 this->_inSelection = 2;
-                //this->_stateDialogBox = 3;
+                this->_graphicHandler->getPlayer()->getBody()->SetTransform(b2Vec2(145, 685), this->_graphicHandler->getPlayer()->getBody()->GetAngle());
             }
         }
-        if (this->_inSelection)
-            this->inHudCombatMovements();
     }
 }
 

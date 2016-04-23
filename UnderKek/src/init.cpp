@@ -47,7 +47,8 @@ const int   Underkek::init()
     this->_mediaHandler->addNewTexture("../media/textures/tileset.gif", "map_tileset");
     this->_mediaHandler->addNewTexture("../media/textures/heart.png", "soul_heart");
     this->_mediaHandler->addNewSprite(this->_mediaHandler->getTexture("soul_heart"), "player_soul");
-    this->_mediaHandler->addNewSound("../media/sounds/tic.wav", "tic_dialog");
+    this->_mediaHandler->addNewSound("../media/sounds/voice_vanilla.wav", "tic_dialog");
+    this->_mediaHandler->addNewSound("../media/sounds/select_hud_combat.wav", "select_hud_combat");
     this->playerInit();
     this->_tilesetHandler->init(this->_mediaHandler->getTexture("map_tileset"), sf::Vector2u(32, 32), "../media/maps/base", 0, 0, _tiledef.data());
     if (this->_graphicHandler->init()) {
@@ -146,6 +147,13 @@ const int Underkek::initCombatMode()
     this->_dialogBox.setColor(sf::Color::White);
     this->_dialogBox.setPosition(150, 425);
     this->_dialogBox.setCharacterSize(40);
+
+    //Foe text
+    this->_foeText.setFont(*this->_mediaHandler->getFont("DTM-Sans"));
+    this->_foeText.setColor(sf::Color::White);
+    this->_foeText.setPosition(150, 425);
+    this->_foeText.setCharacterSize(40);
+    this->_foeText.setString("* There seem to be no monster facing\n    you...");
 
     /* Combat Box */
     b2BodyDef myBodyDef;

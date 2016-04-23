@@ -22,6 +22,7 @@ public:
     const int   pollEvents();
     const int   inCombatMovements();
     const int   inHudCombatMovements();
+    const int   foeTexts();
 private:
     GraphicHandler *_graphicHandler;
     MediaHandler   *_mediaHandler;
@@ -52,6 +53,7 @@ private:
     sf::Text        _dialogBox;
     sf::Time        _delayText;
     int             _stateDialogBox;
+    sf::Text        _foeText;
 
     //Player combat state
     bool            _inCombat;
