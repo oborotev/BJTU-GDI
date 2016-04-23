@@ -25,11 +25,11 @@ add_executable(UnderKek ${KEKENGINE_SRC} ${COLLISIONS_SRC} ${ANIMATIONS_SRC}  ${
 #target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
 
 # SFML libraries
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-audio.so)
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-graphics.so)
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-network.so)
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-system.so)
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-window.so)
+target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-audio.so.2.3.2)
+target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-graphics.so.2.3.2)
+target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-network.so.2.3.2)
+target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-system.so.2.3.2)
+target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/libs/SFML/libsfml-window.so.2.3.2)
 
 #BOX2D
 #find_package(Box2D)
