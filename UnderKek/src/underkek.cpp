@@ -27,17 +27,12 @@ const int        Underkek::wanderlust()
 
 const int   Underkek::pollEvents()
 {
-    if (this->_inSelection > 1)
+    if (this->_inSelection > 1 && this->_inSelection < 6)
         this->inHudCombatMovements();
+    else if (this->_inSelection == 7)
+        this->inActMenuMovements();
     if (this->_combatMode)
     {
-        if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::E)) {
-            this->_mediaHandler->getSound("tic_dialog")->play();
-            this->_graphicHandler->getBoxAnimationsHandler()->registerNewAnimation("combat_standard", this->_physicsHandler->getBody("combat_box"), BoxAnimations::SIZE_CHANGE,
-                                                                                   this->_sizeDialogBox, this->_positionDialogBox,
-                                                                                   this->_sizeCombatBox, this->_positionCombatBox,
-                                                                                   this->_physicsHandler->getBody("combat_box")->GetFixtureList()->GetBody()->GetAngle(), 7);
-        }
         if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::Return) && this->_inSelection == 1)
         {
             if (this->_stateDialogBox == 2) {

@@ -155,6 +155,14 @@ const int Underkek::initCombatMode()
     this->_foeText.setCharacterSize(40);
     this->_foeText.setString("* There seem to be no monster facing\n    you...");
 
+    //Act choices
+    this->_actChoices.push_back(sf::Text());
+    this->_actChoices.back().setFont(*this->_mediaHandler->getFont("DTM-Sans"));
+    this->_actChoices.back().setColor(sf::Color::White);
+    this->_actChoices.back().setPosition(200, 425);
+    this->_actChoices.back().setCharacterSize(40);
+    this->_actChoices.back().setString("* Wander about");
+
     /* Combat Box */
     b2BodyDef myBodyDef;
     myBodyDef.type = b2_staticBody;
@@ -214,7 +222,7 @@ const int Underkek::initCombatMode()
     soulFixtureDef.shape = &boxShape;
     this->_physicsHandler->getBody("player_soul")->CreateFixture(&soulFixtureDef);
     this->_graphicHandler->getPlayer()->setPhysicBody(this->_physicsHandler->getBody("player_soul"), this->_mediaHandler->getSprite("player_soul"));
-    this->_graphicHandler->getPlayer()->setActive(false);
+    //this->_graphicHandler->getPlayer()->setActive(false);
     this->_graphicHandler->getPlayer()->setXYstandalone(500, 475);
 
     //For dialog box
@@ -223,4 +231,7 @@ const int Underkek::initCombatMode()
     //Player combat states
     this->_inCombat = false;
     this->_inSelection = 1;
+
+    //act menu
+    this->_stateActMenu = 0;
 }

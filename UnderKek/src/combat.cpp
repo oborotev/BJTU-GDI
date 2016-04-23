@@ -46,28 +46,6 @@ const int   Underkek::inCombatMovements()
         this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::DOWN);
 }
 
-const int   Underkek::inHudCombatMovements()
-{
-    bool    triggered = false;
-
-    if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::Left)) {
-        this->_inSelection = this->_inSelection > 2 ? this->_inSelection - 1 : 5;
-        this->_mediaHandler->getSound("select_hud_combat")->play();
-        triggered = true;
-    }
-    else if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::Right)) {
-        this->_inSelection = this->_inSelection < 5 ? this->_inSelection + 1 : 2;
-        this->_mediaHandler->getSound("select_hud_combat")->play();
-        triggered = true;
-    }
-    else if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::Return) && this->_inSelection > 1)
-    {
-        this->_mediaHandler->getSound("select_hud_combat")->play();
-    }
-    if (triggered)
-        this->_graphicHandler->getPlayer()->getBody()->SetTransform(b2Vec2(145 + (215 * (this->_inSelection - 2)), 685), this->_graphicHandler->getPlayer()->getBody()->GetAngle());
-}
-
 const int   Underkek::combat()
 {
     this->_graphicHandler->getPlayer()->setSpeed(2.5);
@@ -81,16 +59,20 @@ const int   Underkek::combat()
         this->_stateDialogBox = this->_graphicHandler->getSpeechSoundHandler()->textToSpeech(this->_empty, this->_dialogBox, this->_mediaHandler->getSound("tic_dialog"));
     if (this->_inSelection == 1)
         this->_graphicHandler->draw(this->_dialogBox);
-    else
+    else if (this->_inSelection == 7)
+        this->actMenu();
+    else if (this->_inSelection != 0 && this->_inSelection < 10)
         this->_graphicHandler->draw(this->_foeText);
 
+    if (this->_inSelection == 10 && !this->_inCombat)
+        this->_inCombat = !this->_graphicHandler->getBoxAnimationsHandler()->isAnimationRunning("combat_standard");
 
     //Hud combat
     if (this->_inSelection)
         this->hudCombat();
 
     //Heart
-    if (this->_inSelection > 1 || this->_inCombat)
+    if (this->_inSelection > 1 && this->_inSelection < 10 || this->_inCombat)
     {
         this->_graphicHandler->getPlayer()->setActive(true);
         this->_graphicHandler->getPlayer()->updateBody();

@@ -23,6 +23,8 @@ public:
     const int   inCombatMovements();
     const int   inHudCombatMovements();
     const int   foeTexts();
+    const int   actMenu();
+    const int   inActMenuMovements();
 private:
     GraphicHandler *_graphicHandler;
     MediaHandler   *_mediaHandler;
@@ -49,11 +51,14 @@ private:
     sf::RectangleShape _redBar;
     sf::RectangleShape _yellowBar;
 
-    //Dialog Box
+    /*Dialog Box*/
     sf::Text        _dialogBox;
     sf::Time        _delayText;
     int             _stateDialogBox;
     sf::Text        _foeText;
+    //Act menu
+    std::vector<sf::Text> _actChoices;
+    int             _stateActMenu;
 
     //Player combat state
     bool            _inCombat;
