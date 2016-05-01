@@ -25,6 +25,8 @@ public:
     const int   foeTexts();
     const int   actMenu();
     const int   inActMenuMovements();
+    const int   initBeforeCombat();
+    const int   initBeforeWanderlust();
 private:
     GraphicHandler *_graphicHandler;
     MediaHandler   *_mediaHandler;
@@ -66,6 +68,10 @@ private:
 
     //test
     std::vector<std::string> _empty;
+
+    //x and y position of player before combat
+    double          _xPlayerBeforeCombat;
+    double          _yPlayerBeforeCombat;
 };
 
 #endif //UNDERKEK_UNDERKEK_H

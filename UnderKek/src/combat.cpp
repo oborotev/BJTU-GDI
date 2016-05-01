@@ -46,6 +46,24 @@ const int   Underkek::inCombatMovements()
         this->_graphicHandler->moveLivingEntityBody(this->_graphicHandler->getPlayer(), LivingEntity::Direction::DOWN);
 }
 
+const int   Underkek::initBeforeCombat()
+{
+    this->_xPlayerBeforeCombat = this->_graphicHandler->getPlayer()->getX();
+    this->_yPlayerBeforeCombat = this->_graphicHandler->getPlayer()->getY();
+    this->_graphicHandler->getCamera()->updatePositionCenter(1024/2, 768/2);
+    this->_graphicHandler->getPlayer()->setXYstandalone(500, 475);
+    //For dialog box
+    this->_stateDialogBox = 3;
+
+    //Player combat states
+    this->_inCombat = false;
+    this->_inSelection = 1;
+
+    //act menu
+    this->_stateActMenu = 0;
+    this->_combatMode = true;
+}
+
 const int   Underkek::combat()
 {
     this->_graphicHandler->getPlayer()->setSpeed(2.5);

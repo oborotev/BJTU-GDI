@@ -29,7 +29,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${dir}/bin")
 
 link_directories(libs/SFML)
 
-set(SOURCE_FILES src/main.cpp src/underkek.cpp src/init.cpp src/combat.cpp src/combatMenus.cpp)
+set(SOURCE_FILES src/main.cpp src/underkek.cpp src/init.cpp src/combat.cpp src/combatMenus.cpp src/wanderlust.cpp)
 add_executable(UnderKek ${KEKENGINE_SRC} ${COLLISIONS_SRC} ${ANIMATIONS_SRC}  ${SOURCE_FILES})
 
 # Detect and add SFML

@@ -119,12 +119,15 @@ void     GraphicHandler::loop()
         return;
     }
     this->_boxAnimationsHandler->animationsHandler();
-    if (_fpsDebug)
+    if (_fpsDebug) {
+        this->_clockHUD->setPosXY((this->_mainCamera->getCenterX() - (this->_modeWidth / 2)) + 800, (this->_mainCamera->getCenterY() - (this->_modeHeight / 2)) + 600);
         this->_window->draw(*this->_clockHUD);
+    }
     if (!_playerMoved && _player)
         this->_player->changeDirection(LivingEntity::Direction::STILL);
     _playerMoved = false;
     _calledToMove = false;
+    this->_debugEventTriggerOne = false;
     this->_window->setView(*this->_mainCamera->getView());
     this->_window->display();
     this->_window->clear(sf::Color::Black);
@@ -181,7 +184,7 @@ const bool      GraphicHandler::pollEvent()
 
 const bool      GraphicHandler::eventTriggered(const sf::Event::EventType& eventType, const sf::Keyboard::Key& code)
 {
-    if (this->_event.type == sf::Event::KeyReleased && this->_event.key.code == sf::Keyboard::F9)
+    if (this->_event.type == sf::Event::KeyReleased && this->_event.key.code == sf::Keyboard::F9 && !this->_debugEventTriggerOne)
         this->_fpsDebug = !this->_fpsDebug;
     if (code == sf::Keyboard::KeyCount) {
         if (this->_event.type == eventType)
@@ -189,6 +192,7 @@ const bool      GraphicHandler::eventTriggered(const sf::Event::EventType& event
     }
     else if (this->_event.type == eventType && this->_event.key.code == code)
         return (true);
+    this->_debugEventTriggerOne = true;
     return (false);
 }
 
@@ -220,4 +224,9 @@ PhysicsHandler* GraphicHandler::getPhysicsHandler() const
 SpeechSound*    GraphicHandler::getSpeechSoundHandler() const
 {
     return (this->_speechSoundHandler);
+}
+
+ClockHUD*       GraphicHandler::getClockHUD() const
+{
+    return (this->_clockHUD);
 }

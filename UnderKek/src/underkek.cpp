@@ -31,6 +31,13 @@ const int   Underkek::pollEvents()
         this->inHudCombatMovements();
     else if (this->_inSelection == 7)
         this->inActMenuMovements();
+    if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::K))
+    {
+        if (!this->_combatMode)
+            this->initBeforeCombat();
+        else
+            this->initBeforeWanderlust();
+    }
     if (this->_combatMode)
     {
         if (this->_graphicHandler->eventTriggered(sf::Event::KeyReleased, sf::Keyboard::Return) && this->_inSelection == 1)

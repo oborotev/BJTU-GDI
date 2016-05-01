@@ -34,7 +34,7 @@ const int   Underkek::playerInit()
 
 const int   Underkek::init()
 {
-    this->_combatMode = true;
+    this->_combatMode = false;
     _tiledef.fill(TilesetHandler::WALL);
     _tiledef[9] = TilesetHandler::FREE;
     this->_graphicHandler = new GraphicHandler("Underkek", "../media/fonts/DTM-Mono.otf");
@@ -56,8 +56,7 @@ const int   Underkek::init()
         return 1;
     }
     this->_physicsHandler = this->_graphicHandler->getPhysicsHandler();
-    this->_graphicHandler->getCamera()->updatePositionCenter(1024/2, 768/2);
-
+    this->_graphicHandler->getCamera()->updatePositionCenter(this->_graphicHandler->getPlayer()->getX(), this->_graphicHandler->getPlayer()->getY());
     //Player Infos
     this->_playerName = "KEK";
     this->_playerLevel = -1;
@@ -82,8 +81,8 @@ const int   Underkek::init()
     this->_hpNumbers.setString("20 / 20");
     this->_hpNumbers.setCharacterSize(27);
     this->_hpNumbers.setPosition(530, 610);
-    this->_empty.push_back("* This is a beatiful sentence my\nfriend. But There is nothing to see\n here.");
-    this->_empty.push_back("* But this is another text my\nlittle friend ;)");
+    this->_empty.push_back("* This is a test exemple my friend.\n There is not much to see here.");
+    this->_empty.push_back("* You can choose the act button, but\n you will only have one option ;) ");
     this->initCombatMode();
     return (0);
 }
@@ -223,15 +222,4 @@ const int Underkek::initCombatMode()
     this->_physicsHandler->getBody("player_soul")->CreateFixture(&soulFixtureDef);
     this->_graphicHandler->getPlayer()->setPhysicBody(this->_physicsHandler->getBody("player_soul"), this->_mediaHandler->getSprite("player_soul"));
     //this->_graphicHandler->getPlayer()->setActive(false);
-    this->_graphicHandler->getPlayer()->setXYstandalone(500, 475);
-
-    //For dialog box
-    this->_stateDialogBox = 3;
-
-    //Player combat states
-    this->_inCombat = false;
-    this->_inSelection = 1;
-
-    //act menu
-    this->_stateActMenu = 0;
 }

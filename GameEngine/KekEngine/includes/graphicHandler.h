@@ -69,6 +69,7 @@ public:
     void        drawPolygonFromFixtures(b2Fixture* fixtures);
     //CLock
     sfx::FrameClock* getClock() const;
+    ClockHUD*        getClockHUD() const;
     //Mutex
     sf::Mutex   _mutex;
 private:
@@ -119,6 +120,7 @@ private:
     sf::Font         _mainFont;
     //Debug
     bool             _fpsDebug;
+    bool             _debugEventTriggerOne;
 };
 
 #endif //MAPEDITINGTOOL_GRAPHICHANDLER_H
